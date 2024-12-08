@@ -174,28 +174,31 @@ nav::after {
 }
 
 /* Services Section */
-.pricing-chart {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center services */
-    gap: 20px; /* Add spacing between services */
-    max-width: 800px;
-    margin: 0 auto;
-}
-
+/* Pricing chart styles */
 .pricing-chart .service {
     background-color: #B7C9E2;
     color: #333;
     padding: 20px;
+    margin-bottom: 20px;
     border-radius: 100px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
-    width: 100%; /* Full width for better centering */
-    max-width: 400px; /* Limit the width */
-    text-align: center;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
+}
+.pricing-chart .service h3 {
+    color: #D00000; /* Red color for service titles */
+    margin-bottom: 10px;
 }
 
-.pricing-chart .service h3 {
-    color: #D00000;
+.service {
+    background-color: black;
+    color: #333;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.service h3 {
+    color: #D00000; /* Red color for service titles */
     margin-bottom: 10px;
 }
 

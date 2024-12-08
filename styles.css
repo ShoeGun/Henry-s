@@ -81,87 +81,100 @@ nav::after {
     font-weight: bold;
 }
 
-/* Clouds */
+/* Cloud Styling */
+:root {
+    --cloud-scale: 2; /* Adjust this factor to scale the size of the clouds */
+}
+
 .cloud {
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--cloud-bg);
-    border-radius: calc(1.5em * var(--cloud-scale));
-    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) var(--cloud-inset-shadow),
-                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) rgba(0, 0, 0, 0.25);
+    background-color: #fff; /* Cloud color */
+    border-radius: calc(1.5em * var(--cloud-scale)); /* Make the base of the cloud oval */
+    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) hsla(0, 0%, 100%, 0.5),
+                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) hsla(0, 0%, 0%, 0.25);
     height: calc(2em * var(--cloud-scale));
     width: calc(4em * var(--cloud-scale));
-    position: absolute;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    z-index: 1; /* Ensure clouds are below header and nav */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1; /* Ensure clouds are behind logo */
+    animation: cloud-move linear infinite;
 }
 
-.cloud::before, .cloud::after {
+/* Cloud Pseudo-elements */
+.cloud::before,
+.cloud::after {
     content: '';
     position: absolute;
-    background-color: var(--cloud-bg);
-    border-radius: 100%;
+    background-color: #fff;
+    border-radius: 100%; /* Rounded puff elements */
 }
 
 .cloud:before {
     width: calc(2em * var(--cloud-scale));
     height: calc(2em * var(--cloud-scale));
     top: calc(-1em * var(--cloud-scale));
-    left: calc(.5em * var(--cloud-scale));
+    left: calc(0.5em * var(--cloud-scale));
 }
 
 .cloud:after {
     width: calc(1.5em * var(--cloud-scale));
     height: calc(1.5em * var(--cloud-scale));
-    top: calc(-.75em * var(--cloud-scale));
-    right: calc(.5em * var(--cloud-scale));
+    top: calc(-0.75em * var(--cloud-scale));
+    right: calc(0.5em * var(--cloud-scale));
 }
 
 .cloud > span {
-    z-index: 2; /* Ensure text inside clouds is visible */
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+    font-weight: bold;
 }
 
 /* Cloud Animations */
 @keyframes cloud-move {
     0% {
-        left: -250px;
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(-50px);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    75% {
-        transform: translateY(-50px);
+        transform: translateX(-100vw);
     }
     100% {
-        left: 100%;
-        transform: translateY(0);
+        transform: translateX(100vw);
     }
 }
 
+/* Individual Cloud Settings */
 #cloud1 {
-    animation: cloud-move 30s linear infinite;
     top: 100px;
-    left: -300px;
+    animation-duration: 30s;
 }
 
 #cloud2 {
-    animation: cloud-move 50s linear infinite;
     top: 200px;
-    left: -500px;
+    animation-duration: 50s;
 }
 
 #cloud3 {
-    animation: cloud-move 40s linear infinite;
     top: 150px;
-    left: -400px;
+    animation-duration: 40s;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    :root {
+        --cloud-scale: 1.0; /* Reduce size for smaller screens */
+    }
+
+    #cloud1, #cloud2, #cloud3 {
+        top: auto;
+        transform: translateX(-50%);
+    }
+
+    #cloud1 { top: 80px; }
+    #cloud2 { top: 160px; }
+    #cloud3 { top: 240px; }
 }
 
 /* Services Section */

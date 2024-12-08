@@ -191,61 +191,42 @@ nav::after {
 }
 
 /* testing area  */
-.service {
-    background-color: black;
-    color: #333;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-}
-.service h3 {
-    color: #D00000; /* Red color for service titles */
-    margin-bottom: 10px;
-}
-
-/* Services Section */
-/* Pricing chart styles */
-.pricing-chart .service .services {
-    background-color: #B7C9E2;
-    color: #333;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 100px;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-}
-.pricing-chart .service h3 {
-    color: #D00000; /* Red color for service titles */
-    margin-bottom: 10px;
-}
-
-
-
-
 .pricing-chart {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center services */
-    gap: 20px; /* Add spacing between services */
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex; /* Enables flexbox */
+    justify-content: center; /* Centers items horizontally */
+    align-items: flex-start; /* Aligns items to the top */
+    flex-wrap: nowrap; /* Ensures all items are in one row (no wrapping) */
+    gap: 20px; /* Adds spacing between the items */
+    margin: 20px auto; /* Centers the entire chart horizontally */
+    padding: 20px 0; /* Adds padding above and below */
+    text-align: center; /* Ensures text in each box is centered */
 }
 
+/* Service Box Styling */
 .pricing-chart .service {
-    background-color: #B7C9E2;
-    color: #333;
+    background-color: #B7C9E2; /* Light blue background */
+    color: #333; /* Dark text color */
     padding: 20px;
-    border-radius: 100px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
-    width: 100%; /* Full width for better centering */
-    max-width: 400px; /* Limit the width */
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    flex: 1 1 auto; /* Allows items to grow and shrink */
+    max-width: 250px; /* Ensures consistent width */
     text-align: center;
 }
 
-.pricing-chart .service h3 {
-    color: #D00000;
-    margin-bottom: 10px;
+/* Mobile View: Stack Vertically */
+@media (max-width: 768px) {
+    .pricing-chart {
+        flex-direction: column; /* Stacks items vertically */
+        gap: 20px; /* Adds spacing between stacked items */
+    }
+
+    .pricing-chart .service {
+        max-width: none; /* Removes width constraint for stacking */
+    }
 }
+/* Services Section */
+
 
 /* CTA Section */
 .cta {

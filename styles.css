@@ -12,42 +12,25 @@
     --cloud-scale: 2; /* Adjust the size of clouds */
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-doc);
+    line-height: 1.6;
+    color: #333;
+    text-align: center; /* Default centering for most content */
+}
+
 header {
     background-color: #023566;
     color: #FFFFFF;
-    padding: 20px;
-    position: relative; /* Necessary for absolute positioning of clouds */
-    padding: 0px;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #6f8db8; /* Background color of the entire page */
-      font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    /*padding: 20px;*/
-}
-
-
-.content-section {
-    text-align: center;
-    margin-bottom: 30px;
-    transition: opacity 5s ease;
-    padding: 20px; /* Adjust the padding value as needed */
-}
-
-
-.content-section h2 {
-    color: Black; /* Red color for the section titles */
+    position: relative;
     margin-bottom: 20px;
+    z-index: 2; /* Ensure header appears above clouds */
 }
-
-
 
 #logo {
     position: relative;
-    z-index: 2;
+    z-index: 3; /* Ensure logo is above clouds */
     width: 300px;
     height: auto;
     display: block;
@@ -59,13 +42,7 @@ nav {
     background-color: #023566;
     border-bottom: 3px solid black;
     position: relative;
-    z-index:2;
-}
-
-.content-section {
-    text-align: center;
-    margin: 0 auto;
-    padding: 20px 0;
+    z-index: 3; /* Ensure nav stays above clouds */
 }
 
 nav::after {
@@ -79,7 +56,6 @@ nav::after {
 }
 
 #nav-list {
-    
     list-style: none;
     padding: 0;
     margin: 0;
@@ -92,8 +68,6 @@ nav::after {
 }
 
 #nav-list li a {
-     width: auto;
-    border-radius: 5px;
     color: white;
     text-decoration: none;
     padding: 10px 20px;
@@ -123,7 +97,7 @@ nav::after {
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    z-index: 1;
+    z-index: 1; /* Ensure clouds are below header and nav */
 }
 
 .cloud::before, .cloud::after {
@@ -148,7 +122,7 @@ nav::after {
 }
 
 .cloud > span {
-    z-index: 1;
+    z-index: 2; /* Ensure text inside clouds is visible */
 }
 
 /* Cloud Animations */
@@ -175,13 +149,13 @@ nav::after {
 #cloud1 {
     animation: cloud-move 30s linear infinite;
     top: 100px;
-    left: -200px;
+    left: -300px;
 }
 
 #cloud2 {
     animation: cloud-move 50s linear infinite;
     top: 200px;
-    left: -300px;
+    left: -500px;
 }
 
 #cloud3 {
@@ -190,33 +164,31 @@ nav::after {
     left: -400px;
 }
 
-/* Pricing chart styles */
+/* Services Section */
+.pricing-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .pricing-chart .service {
     background-color: #B7C9E2;
     color: #333;
     padding: 20px;
-    margin-bottom: 20px;
     border-radius: 100px;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
+
 .pricing-chart .service h3 {
-    color: #D00000; /* Red color for service titles */
+    color: #D00000;
     margin-bottom: 10px;
 }
-
-/* Mobile View: Stack Vertically */
-@media (max-width: 768px) {
-    .pricing-chart {
-        flex-direction: column; /* Stacks items vertically */
-        gap: 20px; /* Adds spacing between stacked items */
-    }
-
-    .pricing-chart .service {
-        max-width: none; /* Removes width constraint for stacking */
-    }
-}
-/* Services Section */
-
 
 /* CTA Section */
 .cta {
@@ -249,7 +221,7 @@ nav::after {
 }
 
 .service-area-map img {
-    max-width: 60%; /* Reduce map size */
+    max-width: 60%;
     height: auto;
     border: 3px solid #D00000;
     margin: 20px auto;
@@ -295,10 +267,10 @@ footer {
     }
 
     .pricing-chart .service {
-        flex: 0 1 calc(100% - 20px); /* Full-width on small screens */
+        flex: 0 1 calc(100% - 20px);
     }
 
     .service-area-map img {
-        max-width: 80%; /* Further reduce map size on small screens */
+        max-width: 80%;
     }
 }

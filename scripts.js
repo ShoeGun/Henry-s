@@ -12,7 +12,17 @@ function showSection(sectionId) {
     console.log("Showing section:", sectionId); // Debugging line
     document.getElementById(sectionId).style.display = 'block';
 
-    // Update active class for the clicked nav link - Added check for null
+    // Toggle CTA visibility based on the section
+    const cta = document.getElementById('cta');
+    if (cta) {
+        if (sectionId === 'services') {
+            cta.style.display = 'block'; // Show the CTA on the Services page
+        } else {
+            cta.style.display = 'none'; // Hide the CTA for other sections
+        }
+    }
+
+    // Update active class for the clicked nav link
     document.querySelectorAll('.nav-link').forEach(function(link) {
         link.classList.remove('active');
     });
@@ -35,10 +45,9 @@ function showSection(sectionId) {
 // Carousel behavior
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded and parsed');
-
-    // Placeholder for potential early carousel initialization if not dynamically loaded
 });
 
+// Initialize Carousel Logic
 function initCarousel(carouselId, indicatorId) {
     console.log(`Initializing carousel: ${carouselId} with indicators: ${indicatorId}`);
     let slides = document.getElementById(carouselId).getElementsByClassName("carousel-slide");
@@ -90,18 +99,18 @@ function initCarousel(carouselId, indicatorId) {
         }
     }
 
-function nextSlide(n) {
-    console.log(`Current slide before change: ${currentSlide}`);
-    currentSlide += n;
-    if (currentSlide >= slides.length) { 
-        currentSlide = 0; 
+    function nextSlide(n) {
+        console.log(`Current slide before change: ${currentSlide}`);
+        currentSlide += n;
+        if (currentSlide >= slides.length) {
+            currentSlide = 0;
+        }
+        if (currentSlide < 0) {
+            currentSlide = slides.length - 1;
+        }
+        console.log(`Current slide after change: ${currentSlide}`);
+        showSlides();
     }
-    if (currentSlide < 0) { 
-        currentSlide = slides.length - 1; 
-    }
-    console.log(`Current slide after change: ${currentSlide}`);
-    showSlides();
-}
 
     createSlideIndicators();
     showSlides(); // Initially show the first slide

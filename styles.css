@@ -81,100 +81,115 @@ nav::after {
     font-weight: bold;
 }
 
-/* Cloud Styling */
-:root {
-    --cloud-scale: 2; /* Adjust this factor to scale the size of the clouds */
-}
-
+/* Clouds */
 .cloud {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff; /* Cloud color */
-    border-radius: calc(1.5em * var(--cloud-scale)); /* Make the base of the cloud oval */
-    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) hsla(0, 0%, 100%, 0.5),
-                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) hsla(0, 0%, 0%, 0.25);
+    background-color: var(--cloud-bg);
+    border-radius: calc(1.5em * var(--cloud-scale));
+    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) var(--cloud-inset-shadow),
+                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) rgba(0, 0, 0, 0.25);
     height: calc(2em * var(--cloud-scale));
     width: calc(4em * var(--cloud-scale));
+    position: absolute;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    z-index: 1; /* Ensure clouds are behind logo */
-    animation: cloud-move linear infinite;
+    z-index: 1; /* Behind logo and navbar */
 }
 
-/* Cloud Pseudo-elements */
-.cloud::before,
-.cloud::after {
+.cloud::before, .cloud::after {
     content: '';
     position: absolute;
-    background-color: #fff;
-    border-radius: 100%; /* Rounded puff elements */
+    background-color: var(--cloud-bg);
+    border-radius: 100%;
 }
 
 .cloud:before {
     width: calc(2em * var(--cloud-scale));
     height: calc(2em * var(--cloud-scale));
     top: calc(-1em * var(--cloud-scale));
-    left: calc(0.5em * var(--cloud-scale));
+    left: calc(.5em * var(--cloud-scale));
 }
 
 .cloud:after {
     width: calc(1.5em * var(--cloud-scale));
     height: calc(1.5em * var(--cloud-scale));
-    top: calc(-0.75em * var(--cloud-scale));
-    right: calc(0.5em * var(--cloud-scale));
+    top: calc(-.75em * var(--cloud-scale));
+    right: calc(.5em * var(--cloud-scale));
 }
 
 .cloud > span {
-    position: relative;
-    z-index: 2;
-    white-space: nowrap;
-    font-weight: bold;
+    z-index: 2; /* Text stays above the cloud background */
 }
 
 /* Cloud Animations */
 @keyframes cloud-move {
     0% {
-        transform: translateX(-100vw);
+        left: -250px; /* Start off-screen to the left */
+        transform: translateY(0); /* Start at initial vertical position */
+    }
+    25% {
+        transform: translateY(-50px); /* Move up */
+    }
+    50% {
+        transform: translateY(0); /* Move back down */
+    }
+    75% {
+        transform: translateY(-50px); /* Move up again */
     }
     100% {
-        transform: translateX(100vw);
+        left: 100%; /* Move to the right past the screen */
+        transform: translateY(0); /* End at initial vertical position */
     }
 }
 
-/* Individual Cloud Settings */
+/* Individual Cloud Configurations */
 #cloud1 {
+    animation: cloud-move 30s linear infinite;
     top: 100px;
-    animation-duration: 30s;
+    left: -300px; /* Start off-screen */
 }
 
 #cloud2 {
-    top: 200px;
-    animation-duration: 50s;
+    animation: cloud-move 45s linear infinite;
+    top: 150px;
+    left: -400px; /* Start off-screen */
 }
 
 #cloud3 {
-    top: 150px;
-    animation-duration: 40s;
+    animation: cloud-move 60s linear infinite;
+    top: 200px;
+    left: -500px; /* Start off-screen */
 }
 
-/* Responsive Adjustments */
+/* Adjust Clouds for Smaller Screens */
 @media (max-width: 480px) {
     :root {
-        --cloud-scale: 1.0; /* Reduce size for smaller screens */
+        --cloud-scale: 1; /* Reduce cloud size on smaller screens */
+    }
+
+    .cloud {
+        font-size: 0.8em; /* Adjust text size */
     }
 
     #cloud1, #cloud2, #cloud3 {
-        top: auto;
-        transform: translateX(-50%);
+        top: auto; /* Adjust positions dynamically */
     }
 
-    #cloud1 { top: 80px; }
-    #cloud2 { top: 160px; }
-    #cloud3 { top: 240px; }
+    #cloud1 {
+        top: 50px;
+    }
+
+    #cloud2 {
+        top: 100px;
+    }
+
+    #cloud3 {
+        top: 150px;
+    }
 }
 
 /* Services Section */

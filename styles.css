@@ -24,6 +24,8 @@ header {
     color: #FFFFFF;
     position: relative; /* Necessary for absolute positioning of clouds */
     margin-bottom: 20px;
+    z-index: 1; /* Place header below clouds */
+    overflow: visible; /* Ensure clouds are visible outside the header */
 }
 
 #logo {
@@ -39,7 +41,8 @@ header {
 nav {
     background-color: #023566; /* Navbar color */
     border-bottom: 3px solid black; /* Simulated folder appearance */
-    position: relative;
+    position: relative; /* Ensure proper stacking with clouds */
+    z-index: 3; /* Ensure navbar stays above the clouds */
     padding-bottom: 3px; /* Space for border */
 }
 
@@ -95,7 +98,7 @@ nav::after {
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    z-index: 1; /* Below logo */
+    z-index: 2; /* Clouds are behind navbar */
 }
 
 .cloud::before, .cloud::after {
@@ -163,13 +166,21 @@ nav::after {
 }
 
 /* Services Section */
+.pricing-chart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center services */
+    gap: 20px; /* Add spacing between services */
+}
+
 .pricing-chart .service {
     background-color: #B7C9E2;
     color: #333;
     padding: 20px;
-    margin-bottom: 20px;
     border-radius: 100px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+    flex: 0 1 calc(30% - 20px); /* Adjust to fit 3 per row */
+    text-align: center;
 }
 
 .pricing-chart .service h3 {
@@ -181,7 +192,6 @@ nav::after {
     background-color: black;
     color: #333;
     padding: 20px;
-    margin-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
@@ -223,5 +233,9 @@ footer {
 
     nav::after {
         display: none;
+    }
+
+    .pricing-chart .service {
+        flex: 0 1 calc(100% - 20px); /* Full-width on small screens */
     }
 }

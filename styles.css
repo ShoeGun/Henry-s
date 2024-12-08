@@ -7,285 +7,162 @@
 
 :root {
     --bg-doc: #6f8db8;
-    --cloud-bg: #ffffff;
-    --cloud-inset-shadow: #ccc;
-}
-
-header {
-    background-color: #023566;
-    color: #FFFFFF;
-    padding: 20px;
-    position: relative; /* Necessary for absolute positioning of clouds */
-    padding: 0px;
+    --cloud-scale: 2; /* Adjust this for bigger/smaller clouds */
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #6f8db8; /* Background color of the entire page */
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-doc);
     line-height: 1.6;
     color: #333;
-    /*padding: 20px;*/
 }
 
-.content-section {
-    text-align: center;
-    margin-bottom: 30px;
-    transition: opacity 5s ease;
-    padding: 20px; /* Adjust the padding value as needed */
-}
-
-
-.content-section h2 {
-    color: Black; /* Red color for the section titles */
-    margin-bottom: 20px;
-}
-
-
-
-
-/* Pricing chart styles */
-.pricing-chart .service {
-    background-color: #B7C9E2;
-    color: #333;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 100px;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-}
-.pricing-chart .service h3 {
-    color: #D00000; /* Red color for service titles */
-    margin-bottom: 10px;
-}
-
-.service {
-    background-color: black;
-    color: #333;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-}
-
-.service h3 {
-    color: #D00000; /* Red color for service titles */
-    margin-bottom: 10px;
-}
-
-/* Service area map styles */
-.service-area-map img {
-    max-width: 20%; /* Ensures the map does not exceed the width of its container */
-    height: auto; /* Maintains the aspect ratio of the map */
-    border: 3px solid #D00000; /* Optional: adds a border with your brand color */
-    display: block; /* Ensures the map is displayed as a block-level element */
-    margin: 20px auto; /* Centers the map horizontally and adds vertical space */
-}
-
-/* Testimonials styles */
-.testimonials blockquote {
-    background-color: #B7C9E2;
-    border-left: 3px solid #D00000; /* Red color for the blockquote border */
-    margin: 20px 0;
-    padding: 20px;
-    font-style: italic;
-}
-
-.testimonials cite {
-    display: block;
-    color: #555;
-    margin-top: 10px;
-}
-
-
-  
-  /* Additional space below the header */
+/* Header and Nav */
 header {
-    margin-bottom: 20px; /* Or the amount of space you want between the header and the body */
+    background-color: #023566;
+    color: #FFFFFF;
+    position: relative;
+    margin-bottom: 20px;
+    z-index: 2; /* Create a stacking context for logo and clouds */
+    overflow: visible; 
 }
 
-/* Style for the navbar with a folder appearance */
 nav {
-    background-color: #023566; /* Your navbar color */
-    border-bottom: 3px solid Black; /* Bottom border to simulate folder appearance */
+    background-color: #023566;
+    border-bottom: 3px solid Black;
+    position: relative;
 }
 
-  
-  /* Creates a pseudo-element that looks like a border */
 nav::after {
     content: '';
     position: absolute;
-    bottom: -3px; /* Adjust this value to move the border up or down */
+    bottom: -3px;
     left: 0;
     width: 100%;
-    height: 3px; /* Thickness of the border */
-    background-color: Black; /* Color of the border */
+    height: 3px;
+    background-color: Black;
 }
-  
-  
-  
+
 #nav-list {
     list-style: none;
+    display: flex;
+    justify-content: center;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: center; /* This will center your nav items */
-    padding-bottom: 3px; /* Creates space for the border */
+    padding-bottom: 3px;
 }
 
 #nav-list li {
-    margin: 0 10px; /* Adjust the space between nav items as needed */
-    position: relative; /* For pseudo-elements positioning */
+    margin: 0 10px;
+    position: relative;
 }
 
 #nav-list li a {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 10px 20px 0 0; /* Rounded top edges */
+    border-radius: 10px 20px 0 0;
     transition: background-color .5s, color 0.3s;
 }
 
 #nav-list li a:hover, #nav-list li a.active {
-    background-color: Black; /* Highlight color */
+    background-color: Black;
     color: white;
 }
 
 #logo {
     position: relative;
-    z-index: 2;
+    z-index: 3; /* Ensure logo is above clouds */
     width: 300px;
     height: auto;
     display: block;
-    margin: 0 auto; /* Center the logo */
-}
-  
-
-
-
-/* Media queries for larger screens */
-@media (min-width: 768px) {
-  
-    .service-area-map, .testimonials blockquote {
-        max-width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-  
-@media(min-width: 768px) {
-    .pricing-chart {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .service {
-        width: 30%; /* Adjust the width as necessary */
-    }
-
-    /* Adjustments for the service area map and testimonials */
-    .service-area-map, .testimonials blockquote {
-        max-width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-  
-
-
-/* Ensure animations or other dynamic effects are correctly applied */
-.cloud::before, .cloud::after {
-    /* Pseudo-elements for cloud shapes, ensure these are responsive as well */
-}
-  
-  
-@media (max-width: 480px) {
-    /* Logo adjustments */
-    #logo {
-        width: 120px; /* Set a smaller width for the logo */
-        height: auto; /* Maintain aspect ratio */
-        margin: 10px auto; /* Center the logo and add some margin around it */
-    }
-  
-    .cloud {
-        font-size: 12px; /* Adjust the font size for the text inside the clouds */
-    }
-    #cloud1, #cloud2, #cloud3 {
-        top: 10px; /* Adjust this value to reposition clouds as needed */
-        left: 5%; /* Adjust for better positioning on small screens */
-        /* Remove the transform: scale(0.5) property */
-        animation: cloud-move 30s linear infinite;
-    }
-
-
-  
-    /* Navbar adjustments */
-    nav {
-        padding: 10px 0; /* Add some padding to the top and bottom of the navbar */
-    }
-
-    /* Navigation list adjustments */
-    #nav-list {
-        flex-direction: column; /* Stack the list items vertically */
-        margin-top: 10px; /* Add some space between the logo and navigation list */
-    }
-
-    #nav-list li {
-        width: 100%; /* Make list items full width */
-        margin: 5px 0; /* Add some vertical space between list items */
-    }
-
-    #nav-list li a {
-        padding: 10px 15px; /* Maintain a good clickable area for each link */
-        border-radius: 5px; /* If you want rounded corners on mobile */
-        font-size: 0.9em; /* Optionally reduce font size for small screens */
-        width: auto; /* Allow the link to fit content width */
-    }
-
-    /* Hide the pseudo-element border below the navbar on small screens */
-    nav::after {
-        display: none;
-    }
-}
-  
-  @media (max-width: 768px) {
-    #nav-list {
-        flex-direction: column;
-        margin-top: 10px;
-    }
-
-    #nav-list li {
-        margin: 10px 0;
-    }
+    margin: 0 auto;
 }
 
-
-button {
-    background-color: #FF69B4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-footer {
-    background-color: #F2F2F2;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Cloud Styling */
-
-/* ADDING TWO LINES HERE: */
+/* Clouds with Pseudo-elements for Puffiness */
 .cloud {
-    display: flex; 
-    align-items: center; 
+    position: absolute;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    text-align: center;
+    color: black;
+    background-color: #fff;
+    border-radius: calc(1.5em * var(--cloud-scale));
+    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) hsla(0,0%,100%,.5),
+                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) hsla(0,0%,0%,.25);
+    height: calc(2em * var(--cloud-scale));
+    width: calc(4em * var(--cloud-scale));
+    font-size: 1em;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Below logo (z-index:3) */
 }
 
 .cloud > span {
-    margin: 0; /* Ensures perfect centering */
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+    font-weight: bold;
+    margin: 0;
 }
 
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    border-radius: 100%;
+}
 
-/* Rest of your code remains unchanged */
+.cloud:after {
+    height: calc(1.5em * var(--cloud-scale));
+    width: calc(1.5em * var(--cloud-scale));
+    right: calc(.5em * var(--cloud-scale));
+    top: calc(-.75em * var(--cloud-scale));
+}
+
+.cloud:before {
+    height: calc(2em * var(--cloud-scale));
+    width: calc(2em * var(--cloud-scale));
+    left: calc(.5em * var(--cloud-scale));
+    top: calc(-1em * var(--cloud-scale));
+}
+
+@keyframes cloud-move {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(110%);
+    }
+}
+
+/* Clouds' Animation Settings */
+#cloud1 {
+    animation: cloud-move 30s linear infinite;
+    top: 100px;
+    left: -200px;
+}
+
+#cloud2 {
+    animation: cloud-move 40s linear infinite;
+    top: 150px;
+    left: -300px;
+}
+
+#cloud3 {
+    animation: cloud-move 50s linear infinite;
+    top: 200px;
+    left: -400px;
+}
+
+/* Adjust Cloud Sizes for Mobile View */
+@media (max-width: 480px) {
+    :root {
+        --cloud-scale: 1.0;
+    }
+
+    #cloud1 { top: 80px; }
+    #cloud2 { top: 160px; }
+    #cloud3 { top: 240px; }
+}

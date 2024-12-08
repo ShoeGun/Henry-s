@@ -42,7 +42,6 @@ nav {
     background-color: #023566;
     border-bottom: 3px solid black;
     position: relative;
-    z-index: 3; /* Ensure nav stays above clouds */
 }
 
 nav::after {
@@ -195,7 +194,6 @@ nav::after {
 /* Services Section */
 .pricing-chart {
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 20px;
     max-width: 800px;

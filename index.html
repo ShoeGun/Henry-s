@@ -101,33 +101,23 @@
   // Listener to dynamically adjust iframe height
   window.addEventListener('message', (event) => {
     console.log("Parent page received message:", event.data);
+    console.log("Message origin:", event.origin);
 
     if (event.data && event.data.type === 'resizeIframe') {
       const iframe = document.getElementById('appointmentScheduler');
+      console.log("Iframe element found:", !!iframe);
+
       if (iframe) {
         console.log("Updating iframe height to:", event.data.height);
-
-        // Apply the new height
         iframe.style.height = `${event.data.height}px`;
 
-        // Log the inline style and computed style
+        // Check inline and computed style after update
         console.log("Iframe inline height style now:", iframe.style.height);
         const computedHeight = window.getComputedStyle(iframe).height;
-        console.log("Iframe computed height:", computedHeight);
-      } else {
-        console.log("No iframe with id #appointmentScheduler found.");
+        console.log("Iframe computed height after update:", computedHeight);
       }
     }
   });
-
-  function showSection(sectionId) {
-    document.querySelectorAll('.content-section').forEach(section => {
-      section.style.display = section.id === sectionId ? 'block' : 'none';
-    });
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.toggle('active', link.getAttribute('onclick').includes(sectionId));
-    });
-  }
 </script>
 <script src="scripts.js"></script>
 </body>

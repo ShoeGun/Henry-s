@@ -190,6 +190,16 @@ nav::after {
     left: -400px;
 }
 
+
+.service {
+    background-color: black;
+    color: #333;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
 /* Services Section */
 .pricing-chart {
     display: flex;

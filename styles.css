@@ -42,8 +42,6 @@ body {
 }
 
 
-
-
 /* Pricing chart styles */
 .pricing-chart .service {
     background-color: #B7C9E2;
@@ -499,6 +497,7 @@ footer {
 }
 
     .cta {
+    display: block; /* Visible by default */
     text-align: center;
     background-color: #f4f4f4;
     padding: 20px;

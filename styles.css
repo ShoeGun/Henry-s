@@ -97,7 +97,7 @@ nav::after {
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    z-index: 2;
+    z-index: 4;
 }
 
 .cloud::before, .cloud::after {

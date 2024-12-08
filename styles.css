@@ -9,478 +9,196 @@
     --bg-doc: #6f8db8;
     --cloud-bg: #ffffff;
     --cloud-inset-shadow: #ccc;
+    --cloud-scale: 2; /* Adjust the size of clouds */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-doc);
+    line-height: 1.6;
+    color: #333;
+    text-align: center; /* Default centering for most content */
 }
 
 header {
     background-color: #023566;
     color: #FFFFFF;
-    padding: 20px;
-    position: relative; /* Necessary for absolute positioning of clouds */
-    padding: 0px;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #6f8db8; /* Background color of the entire page */
-      font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    /*padding: 20px;*/
-}
-
-.content-section {
-    text-align: center;
-    margin-bottom: 30px;
-    transition: opacity 5s ease;
-    padding: 20px; /* Adjust the padding value as needed */
-}
-
-
-.content-section h2 {
-    color: Black; /* Red color for the section titles */
+    position: relative;
     margin-bottom: 20px;
+    z-index: 2; /* Ensure header appears above clouds */
 }
 
-
-/* Pricing chart styles */
-
-
-
-
-
-/* Service area map styles */
-.service-area-map img {
-    max-width: 20%; /* Ensures the map does not exceed the width of its container */
-    height: auto; /* Maintains the aspect ratio of the map */
-    border: 3px solid #D00000; /* Optional: adds a border with your brand color */
-    display: block; /* Ensures the map is displayed as a block-level element */
-    margin: 20px auto; /* Centers the map horizontally and adds vertical space */
-}
-
-/* Testimonials styles */
-.testimonials blockquote {
-    background-color: #B7C9E2;
-    border-left: 3px solid #D00000; /* Red color for the blockquote border */
-    margin: 20px 0;
-    padding: 20px;
-    font-style: italic;
-}
-
-.testimonials cite {
+#logo {
+    position: relative;
+    z-index: 3; /* Ensure logo is above clouds */
+    width: 300px;
+    height: auto;
     display: block;
-    color: #555;
-    margin-top: 10px;
+    margin: 0 auto;
 }
 
-
-  
-  /* Additional space below the header */
-header {
-    margin-bottom: 20px; /* Or the amount of space you want between the header and the body */
-}
-
-/* Style for the navbar with a folder appearance */
+/* Navigation Bar */
 nav {
-    background-color: #023566; /* Your navbar color */
-    border-bottom: 3px solid Black; /* Bottom border to simulate folder appearance */
+    background-color: #023566;
+    border-bottom: 3px solid black;
+    position: relative;
+    z-index: 3; /* Ensure nav stays above clouds */
 }
 
-  
-  /* Creates a pseudo-element that looks like a border */
 nav::after {
     content: '';
     position: absolute;
-    bottom: -3px; /* Adjust this value to move the border up or down */
+    bottom: -3px;
     left: 0;
     width: 100%;
-    height: 3px; /* Thickness of the border */
-    background-color: Black; /* Color of the border */
+    height: 3px;
+    background-color: black;
 }
-  
-  
-  
+
 #nav-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center; /* This will center your nav items */
-    padding-bottom: 3px; /* Creates space for the border */
+    justify-content: center;
 }
 
 #nav-list li {
-    margin: 0 10px; /* Adjust the space between nav items as needed */
-    position: relative; /* For pseudo-elements positioning */
+    margin: 0 10px;
 }
 
 #nav-list li a {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 10px 20px 0 0; /* Rounded top edges */
-    transition: background-color .5s, color 0.3s;
+    border-radius: 10px 20px 0 0;
+    transition: background-color 0.5s, color 0.3s;
 }
 
 #nav-list li a:hover, #nav-list li a.active {
-    background-color: Black; /* Highlight color */
+    background-color: black;
     color: white;
+    font-weight: bold;
 }
 
-  #logo {
-    position: relative;
-    z-index: 2;
-    width: 300px;
-    height: auto;
-    display: block;
-    margin: 0 auto; /* Center the logo */
-}
-  
-
-
-
-/* Media queries for larger screens */
-@media (min-width: 768px) {
-  
-    .service-area-map, .testimonials blockquote {
-        max-width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-  
-@media(min-width: 768px) {
-    .pricing-chart {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .service {
-        width: 30%; /* Adjust the width as necessary */
-    }
-
-    /* Adjustments for the service area map and testimonials */
-    .service-area-map, .testimonials blockquote {
-        max-width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-  
-
-
-/* Ensure animations or other dynamic effects are correctly applied */
-.cloud::before, .cloud::after {
-    /* Pseudo-elements for cloud shapes, ensure these are responsive as well */
-}
-  
-  
-@media (max-width: 480px) {
-    /* Logo adjustments */
-    #logo {
-        width: 120px; /* Set a smaller width for the logo */
-        height: auto; /* Maintain aspect ratio */
-        margin: 10px auto; /* Center the logo and add some margin around it */
-    }
-  
-    .cloud {
-        font-size: 12px; /* Adjust the font size for the text inside the clouds */
-    }
-    #cloud1, #cloud2, #cloud3 {
-        top: 10px; /* Adjust this value to reposition clouds as needed */
-        left: 5%; /* Adjust for better positioning on small screens */
-        /* Remove the transform: scale(0.5) property */
-        animation: cloud-move 30s linear infinite;
-    }
-
-
-  
-    /* Navbar adjustments */
-    nav {
-        padding: 10px 0; /* Add some padding to the top and bottom of the navbar */
-    }
-
-    /* Navigation list adjustments */
-    #nav-list {
-        flex-direction: column; /* Stack the list items vertically */
-        margin-top: 10px; /* Add some space between the logo and navigation list */
-    }
-
-    #nav-list li {
-        width: 100%; /* Make list items full width */
-        margin: 5px 0; /* Add some vertical space between list items */
-    }
-
-    #nav-list li a {
-        padding: 10px 15px; /* Maintain a good clickable area for each link */
-        border-radius: 5px; /* If you want rounded corners on mobile */
-        font-size: 0.9em; /* Optionally reduce font size for small screens */
-        width: auto; /* Allow the link to fit content width */
-    }
-
-    /* Hide the pseudo-element border below the navbar on small screens */
-    nav::after {
-        display: none;
-    }
-}
-  
-  @media (max-width: 768px) {
-    #nav-list {
-        flex-direction: column;
-        margin-top: 10px;
-    }
-
-    #nav-list li {
-        margin: 10px 0;
-    }
-}
-
-
-button {
-    background-color: #FF69B4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-footer {
-    background-color: #F2F2F2;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Cloud Styling */
-:root {
-    --cloud-scale: 2; /* Adjust this factor to scale the size of the clouds */
-}
-.cloud > span {
-    position: relative;
-    z-index: 2; /* Higher than the default stacking order */
-    white-space: nowrap;
-    margin-left: 20px; /* Adjust this value as needed */
-}
+/* Clouds */
 .cloud {
-    background-image: linear-gradient(to bottom, hsla(0,0%,100%,0), hsla(0,0%,100%,.1));
-    justify-content: center;
+    display: flex;
     align-items: center;
-    color: black;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-    padding: 0 20px;
-    font-size: 1em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Indenting shadow effect */
-    position: absolute;
-    color: black;
-    background-color: #fff;
+    justify-content: center;
+    background-color: var(--cloud-bg);
     border-radius: calc(1.5em * var(--cloud-scale));
-    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) hsla(0,0%,100%,.5),
-                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) hsla(0,0%,0%,.25);
-    display: inline-block;
+    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) var(--cloud-inset-shadow),
+                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) rgba(0, 0, 0, 0.25);
     height: calc(2em * var(--cloud-scale));
-    margin-left: calc(-2em * var(--cloud-scale));
-    position: absolute;
     width: calc(4em * var(--cloud-scale));
-    -webkit-filter: drop-shadow(0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) hsla(0,0%,0%,.25));
+    position: absolute;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 1em;
+    color: black;
+    white-space: nowrap;
+    z-index: 1; /* Ensure clouds are below header and nav */
 }
+
 .cloud::before, .cloud::after {
     content: '';
     position: absolute;
-    display: block;
-    background-image: inherit; /* Ensure gradients match if used */
-}
-.cloud:after,
-.cloud:before {
-    background-color: #fff;
-    content: '';
+    background-color: var(--cloud-bg);
     border-radius: 100%;
-    position: absolute;
-}
-.cloud:after {
-    background-color: #fff;
-    height: calc(1.5em * var(--cloud-scale));
-    right: calc(.5em * var(--cloud-scale));
-    top: calc(-.75em * var(--cloud-scale));
-    width: calc(1.5em * var(--cloud-scale));
-}
-.cloud:before {
-    background-color: #fff;
-    height: calc(2em * var(--cloud-scale));
-    left: calc(.5em * var(--cloud-scale));
-    top: calc(-1em * var(--cloud-scale));
-    width: calc(2em * var(--cloud-scale));
 }
 
-/* Cloud Animation for Left to Right Movement */
+.cloud:before {
+    width: calc(2em * var(--cloud-scale));
+    height: calc(2em * var(--cloud-scale));
+    top: calc(-1em * var(--cloud-scale));
+    left: calc(.5em * var(--cloud-scale));
+}
+
+.cloud:after {
+    width: calc(1.5em * var(--cloud-scale));
+    height: calc(1.5em * var(--cloud-scale));
+    top: calc(-.75em * var(--cloud-scale));
+    right: calc(.5em * var(--cloud-scale));
+}
+
+.cloud > span {
+    z-index: 2; /* Ensure text inside clouds is visible */
+}
+
+/* Cloud Animations */
 @keyframes cloud-move {
     0% {
-        left: -250px; /* Start off-screen to the left */
-        transform: translateY(0px); /* Start at initial vertical position */
+        left: -250px;
+        transform: translateY(0);
     }
     25% {
-        transform: translateY(-50px); /* Move up */
+        transform: translateY(-50px);
     }
     50% {
-        transform: translateY(0px); /* Move back down */
+        transform: translateY(0);
     }
     75% {
-        transform: translateY(-50px); /* Move up again */
+        transform: translateY(-50px);
     }
     100% {
-        left: 100%; /* Move to the right past the screen */
-        transform: translateY(0px); /* End at initial vertical position */
+        left: 100%;
+        transform: translateY(0);
     }
 }
 
-/* Apply the Animation to Each Cloud */
 #cloud1 {
     animation: cloud-move 30s linear infinite;
-    top: 100px; /* Position each cloud at different vertical positions */
-    left: 300px;
+    top: 100px;
+    left: -300px;
 }
 
 #cloud2 {
     animation: cloud-move 50s linear infinite;
     top: 200px;
+    left: -500px;
 }
 
 #cloud3 {
     animation: cloud-move 40s linear infinite;
     top: 150px;
-}
-  
-  
-  
-  
-  
-  
-  /* Base styles for the entire promo section */
-#items .promo-container {
-    background-color: #ffffff; /* White background for the content */
-    color: #333; /* Standard text color */
-    border-radius: 8px; /* Slightly rounded corners for a modern look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    padding: 20px; /* Adequate padding around the content */
-    margin: 20px auto; /* Centering the container with margin */
-    max-width: 800px; /* Maximum width of the container */
+    left: -400px;
 }
 
-/* Responsive design for the promo container */
-@media (max-width: 768px) {
-    #items .promo-container {
-        margin: 10px; /* Lesser margin for smaller screens */
-        padding: 15px; /* Lesser padding for smaller screens */
-    }
+/* Services Section */
+.pricing-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* Headings styled with the theme colors */
-#items h2 {
-    color: #D00000; /* Red color from the logo */
-    margin-bottom: 15px; /* Space below headings */
+.pricing-chart .service {
+    background-color: #B7C9E2;
+    color: #333;
+    padding: 20px;
+    border-radius: 100px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
 
-/* Paragraphs with better line-height for readability */
-#items p {
-    line-height: 1.5;
-    margin-bottom: 10px; /* Space below paragraphs */
+.pricing-chart .service h3 {
+    color: #D00000;
+    margin-bottom: 10px;
 }
 
-/* Special features with icons or images */
-#items .feature-img {
-    width: 100px; /* Smaller width for icons or images */
-    margin: 10px auto; /* Centering the image */
-    display: block;
-}
-
-/* Red accent for key features and guarantees */
-#items .security-feature, #items .technician-feature, #items .satisfaction-guarantee {
-    border-left: 4px solid #D00000; /* Red accent line */
-    padding: 15px;
-    background-color: #f4f4f4; /* Light gray background for sections */
-    margin: 10px 0; /* Margin around sections */
-}
-
-/* Dynamic hover effect for sections */
-#items .security-feature:hover, #items .technician-feature:hover, #items .satisfaction-guarantee:hover {
-    background-color: #e8e8e8; /* Slightly darker background on hover */
-}
-
-/* Pricing info with emphasis on the price */
-#items .pricing-info .price {
-    color: #D00000; /* Red color for price */
-    font-size: 1.2em; /* Slightly larger font size for price */
-    font-weight: bold;
-}
-
-/* Contact information styling */
-#items .contact-info {
-    text-align: center; /* Centering contact info */
-    padding: 15px;
-    background-color: #e6e6e6; /* Light grey background for contact info */
-    border-radius: 0 0 8px 8px; /* Rounded corners at the bottom */
-    font-weight: bold;
-}
-
-/* Adjust the layout for mobile screens */
-@media (max-width: 480px) {
-    #items .feature-img {
-        width: 80px; /* Even smaller width for icons or images on mobile */
-    }
-
-    #items h2, #items p {
-        text-align: left; /* Aligning text to the left on mobile */
-    }
-
-    #items .contact-info {
-        font-size: 0.9em; /* Smaller font size for contact info on mobile */
-    }
-}
- /* Container for both carousels */
-/* Base styles for carousel containers */
-/* General reset and base styles remain unchanged */
-
-/* Ensuring Flex Container Behaves Correctly */
-.carousel-flex-container {
-  display: flex;
-  flex-direction: column; /* Default to vertical stacking */
-  width: 100%; /* Ensure full width */
-}
-
-@media (min-width: 768px) {
-  .carousel-flex-container {
-    flex-direction: row; /* Side by side on larger screens */
-    justify-content: space-between; /* Distribute space evenly */
-    align-items: flex-start; /* Align items at the start of the container */
-  }
-}
-
-/* Carousel Container Adjustments */
-.carousel-container {
-  width: 100%; /* Full width on smaller screens */
-  margin-bottom: 20px; /* Space between carousels when stacked */
-}
-
-@media (min-width: 768px) {
-  .carousel-container {
-    width: 48%; /* Adjust for side-by-side display */
-    margin-bottom: 0; /* Remove bottom margin on larger screens */
-  }
-}
-
+/* CTA Section */
 .cta {
     text-align: center;
     background-color: #f4f4f4;
     padding: 20px;
-    margin: 50px auto; /* Centers the CTA horizontally */
-    max-width: 800px; /* Restricts the width */
+    margin: 50px auto;
+    max-width: 800px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative; /* Allows precise centering adjustments */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers content horizontally */
-    justify-content: center; /* Centers content vertically */
-    min-height: 300px; /* Ensures a decent height for visual balance */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .cta h2 {
@@ -495,26 +213,64 @@ footer {
     margin-bottom: 20px;
 }
 
-.cta iframe {
-    display: block;
-    margin: 20px auto;
-    width: 100%;
-    max-width: 700px; /* Restricts iframe width */
-   height: auto; /* Allow dynamic height adjustment */
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box; /* Includes padding and border in size */
+/* Service Area Section */
+.service-area-map {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 600px;
 }
 
-/* Media query for responsiveness */
-@media (max-width: 768px) {
-    .cta {
-        padding: 15px;
-        margin: 20px auto; /* Centers CTA on smaller screens */
-        max-width: 95%; /* Adapts to smaller screen sizes */
+.service-area-map img {
+    max-width: 60%;
+    height: auto;
+    border: 3px solid #D00000;
+    margin: 20px auto;
+}
+
+.service-area-map h3 {
+    color: #D00000;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #F2F2F2;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+    #logo {
+        width: 120px;
+        margin: 10px auto;
     }
 
-    .cta iframe {
-        max-width: 100%; /* Ensures iframe fits smaller screens */
+    #nav-list {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    #nav-list li {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    #nav-list li a {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        border-radius: 5px;
+    }
+
+    nav::after {
+        display: none;
+    }
+
+    .pricing-chart .service {
+        flex: 0 1 calc(100% - 20px);
+    }
+
+    .service-area-map img {
+        max-width: 80%;
     }
 }

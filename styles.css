@@ -1,3 +1,86 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-doc: #6f8db8;
+    --cloud-bg: #ffffff;
+    --cloud-inset-shadow: #ccc;
+    --cloud-scale: 2; /* Adjust the size of clouds */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-doc);
+    line-height: 1.6;
+    color: #333;
+    text-align: center; /* Default centering for most content */
+}
+
+header {
+    background-color: #023566;
+    color: #FFFFFF;
+    position: relative;
+    margin-bottom: 20px;
+    z-index: 2; /* Ensure header appears above clouds */
+}
+
+#logo {
+    position: relative;
+    z-index: 5; /* Ensure logo is above clouds */
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #023566;
+    border-bottom: 3px solid black;
+    position: relative;
+    z-index: 3; /* Ensure nav stays above clouds */
+}
+
+nav::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+}
+
+#nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#nav-list li {
+    margin: 0 10px;
+}
+
+#nav-list li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px 20px 0 0;
+    transition: background-color 0.5s, color 0.3s;
+}
+
+#nav-list li a:hover, #nav-list li a.active {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
 /* Clouds */
 .cloud {
     display: flex;
@@ -14,7 +97,7 @@
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    z-index: 9999; /* Ensure clouds are at the very top */
+    z-index: 4; /* Behind logo and navbar */
 }
 
 .cloud::before, .cloud::after {
@@ -92,6 +175,10 @@
         font-size: 0.8em; /* Adjust text size */
     }
 
+    #cloud1, #cloud2, #cloud3 {
+        top: auto; /* Adjust positions dynamically */
+    }
+
     #cloud1 {
         top: 50px;
     }
@@ -102,5 +189,116 @@
 
     #cloud3 {
         top: 150px;
+    }
+}
+
+/* Services Section */
+.pricing-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pricing-chart .service {
+    background-color: #B7C9E2;
+    color: #333;
+    padding: 20px;
+    border-radius: 100px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.pricing-chart .service h3 {
+    color: #D00000;
+    margin-bottom: 10px;
+}
+
+/* CTA Section */
+.cta {
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cta h2 {
+    color: #D00000;
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.cta p {
+    color: #555;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Service Area Section */
+.service-area-map {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.service-area-map img {
+    max-width: 60%;
+    height: auto;
+    border: 3px solid #D00000;
+    margin: 20px auto;
+}
+
+.service-area-map h3 {
+    color: #D00000;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #F2F2F2;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+    #logo {
+        width: 120px;
+        margin: 10px auto;
+    }
+
+    #nav-list {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    #nav-list li {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    #nav-list li a {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        border-radius: 5px;
+    }
+
+    nav::after {
+        display: none;
+    }
+
+    .pricing-chart .service {
+        flex: 0 1 calc(100% - 20px);
+    }
+
+    .service-area-map img {
+        max-width: 80%;
     }
 }

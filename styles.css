@@ -43,32 +43,7 @@ body {
 
 
 /* Pricing chart styles */
-.pricing-chart .service {
-    background-color: #B7C9E2;
-    color: #333;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 100px;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-}
-.pricing-chart .service h3 {
-    color: #D00000; /* Red color for service titles */
-    margin-bottom: 10px;
-}
 
-.service {
-    background-color: black;
-    color: #333;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-}
-
-.service h3 {
-    color: #D00000; /* Red color for service titles */
-    margin-bottom: 10px;
-}
 
 
 

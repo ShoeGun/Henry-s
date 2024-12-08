@@ -522,7 +522,7 @@ footer {
     margin: 20px auto;
     width: 100%;
     max-width: 700px; /* Restricts iframe width */
-    height: 600px; /* Adjust iframe height */
+   height: auto; /* Allow dynamic height adjustment */
     border: 1px solid #ccc;
     border-radius: 10px;
     box-sizing: border-box; /* Includes padding and border in size */

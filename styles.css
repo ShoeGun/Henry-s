@@ -5,11 +5,16 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-doc: #6f8db8;
+    --cloud-scale: 2; /* Scale factor for cloud size */
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #6f8db8;
-    color: #333;
+    background-color: var(--bg-doc);
     line-height: 1.6;
+    color: #333;
 }
 
 /* Header and Nav */
@@ -18,7 +23,7 @@ header {
     color: #FFFFFF;
     position: relative;
     margin-bottom: 20px;
-    overflow: visible; /* Ensure clouds are visible */
+    overflow: visible; /* Ensure clouds can show */
 }
 
 nav {
@@ -56,7 +61,7 @@ nav::after {
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 10px 20px 0 0;
-    transition: background-color 0.5s, color 0.3s;
+    transition: background-color .5s, color 0.3s;
 }
 
 #nav-list li a:hover, #nav-list li a.active {
@@ -73,70 +78,95 @@ nav::after {
     margin: 0 auto;
 }
 
-/* Clouds */
+/* Clouds: revert to original cloud shape code with pseudo-elements */
 .cloud {
     position: absolute;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #000;
+    align-items: center; 
+    justify-content: center; 
     text-align: center;
-    border-radius: 50px;
-    width: 200px; /* Simplified width */
-    height: 100px; /* Simplified height */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-    font-weight: bold;
+    background-image: linear-gradient(to bottom, hsla(0,0%,100%,0), hsla(0,0%,100%,.1));
+    color: black;
+    white-space: nowrap;
+    font-size: 1em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+    border-radius: calc(1.5em * var(--cloud-scale));
+    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) hsla(0,0%,100%,.5),
+                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) hsla(0,0%,0%,.25);
+    height: calc(2em * var(--cloud-scale));
+    width: calc(4em * var(--cloud-scale));
+    transform: translate(-50%, -50%);
     z-index: 10;
+    padding: 0 20px;
 }
 
 .cloud > span {
-    margin: 0; /* No extra margin to ensure perfect centering */
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+    font-weight: bold;
+    margin: 0;
 }
 
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    display: block;
+    background-color: #fff;
+    border-radius: 100%;
+}
+
+.cloud:after {
+    height: calc(1.5em * var(--cloud-scale));
+    width: calc(1.5em * var(--cloud-scale));
+    right: calc(.5em * var(--cloud-scale));
+    top: calc(-.75em * var(--cloud-scale));
+}
+
+.cloud:before {
+    height: calc(2em * var(--cloud-scale));
+    width: calc(2em * var(--cloud-scale));
+    left: calc(.5em * var(--cloud-scale));
+    top: calc(-1em * var(--cloud-scale));
+}
+
+@keyframes cloud-move {
+    0% {
+        transform: translateX(-1000px);
+    }
+    100% {
+        transform: translateX(1000px);
+    }
+}
+
+/* Position your clouds as before (adjust top/left as needed) */
 #cloud1, #cloud2, #cloud3 {
     top: 100px;
+    animation: cloud-move 30s linear infinite;
 }
 
 #cloud1 { left: 200px; }
 #cloud2 { left: 400px; }
 #cloud3 { left: 600px; }
 
-/* Animate clouds left to right if desired */
-@keyframes cloud-move {
-    0% { transform: translateX(-1000px); }
-    100% { transform: translateX(1000px); }
-}
-
-#cloud1, #cloud2, #cloud3 {
-    animation: cloud-move 30s linear infinite;
-}
-
+/* On mobile, scale clouds down and reposition */
 @media (max-width: 480px) {
-    #logo {
-        width: 120px;
-        margin: 10px auto;
-    }
-
-    /* Scale clouds down and center them on mobile */
-    .cloud {
-        width: 120px;
-        height: 60px;
-        font-size: 0.9em;
+    :root {
+        --cloud-scale: 1.0;
     }
 
     #cloud1, #cloud2, #cloud3 {
         left: 50%;
-        transform: translateX(-50%);
-        /* Stack them vertically */
+        transform: translateX(-50%) translateY(-50%);
     }
 
-    #cloud1 { top: 60px; }
-    #cloud2 { top: 130px; }
-    #cloud3 { top: 200px; }
+    #cloud1 { top: 80px; }
+    #cloud2 { top: 160px; }
+    #cloud3 { top: 240px; }
 }
 
-/* Sections */
+/* Content Sections */
 .content-section {
     text-align: center;
     margin-bottom: 30px;
@@ -148,6 +178,7 @@ nav::after {
     margin-bottom: 20px;
 }
 
+/* Pricing Chart, Services, etc. */
 .pricing-chart .service {
     background-color: #B7C9E2;
     color: #333;
@@ -156,7 +187,6 @@ nav::after {
     border-radius: 100px;
     box-shadow: 0 5px 5px rgba(0,0,0,0.15);
 }
-
 .pricing-chart .service h3 {
     color: #D00000;
     margin-bottom: 10px;
@@ -179,6 +209,7 @@ nav::after {
 /* Service Area Map */
 .service-area-map img {
     max-width: 20%;
+    height: auto;
     border: 3px solid #D00000;
     display: block;
     margin: 20px auto;
@@ -210,6 +241,7 @@ button {
     font-size: 1em;
 }
 
+/* Footer */
 footer {
     background-color: #F2F2F2;
     text-align: center;
@@ -299,6 +331,7 @@ footer {
     text-align: center;
     margin: 10px 0;
     overflow: hidden;
+    display: block;
 }
 
 .carousel-slide img {

@@ -1,139 +1,321 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Henry's Super Scoops</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>Appointment Scheduler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 20px auto;/Users/thisdude/Downloads/index.html
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #D00000; /* Brand Red */
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    p {
+      font-size: 1.1em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .form-element-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+      text-align: left;
+    }
+
+    .form-element {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+
+    input, select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #D00000; /* Brand Red */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s, opacity 0.3s;
+    }
+
+    button:hover {
+      background-color: #a00000;
+      opacity: 0.9;
+    }
+
+    /* Loading Overlay */
+    #loadingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    #loadingOverlay .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #D00000;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    #loadingOverlay .message {
+      color: #fff;
+      margin-top: 15px;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-    <div id="cloud1" class="cloud"><span>They Poop It!</span></div>
-    <div id="cloud2" class="cloud"><span> </span></div>
-    <div id="cloud3" class="cloud"><span>We Scoop It!</span></div>
-    <nav>
-        <img src="Images/logo.png" alt="Henry's Super Scoops Logo" id="logo">
-
-        <ul id="nav-list">
-            <li><a href="#" class="nav-link active" onclick="showSection('services')">Services</a></li>
-            <li><a href="#" class="nav-link" onclick="showSection('about')">About Us</a></li>
-            <li><a href="#" class="nav-link" onclick="showSection('items')">Items</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <section id="services" class="content-section">
-        <h2>Services and Pricing</h2>
-        <div class="pricing-chart">
-        
-            <div class="pricing-chart">
-    <div class="service">
-        <h3>Standard Scooping</h3>
-        <p>Starting at $17 per visit. Monthly packages available.</p>
+  <div id="loadingOverlay">
+    <div>
+      <div class="spinner"></div>
+      <div class="message">Please wait...</div>
     </div>
-    <div class="service">
-        <h3>First-Time Cleanup</h3>
-        <p>Comprehensive cleaning starting at $30.</p>
-    </div>
-    <div class="service">
-        <h3>Commercial Services</h3>
-        <p>Contact us for a custom quote.</p>
-    </div>
-</div>
-        </div>
+  </div>
 
-        <div id="cta">
-            <h2>Book Appointment Now</h2>
-            <p>Use our quick and easy scheduling tool to book your appointment today!</p>
-            <iframe 
-                src="https://script.google.com/macros/s/AKfycbwSJ_ttPRhSOsEq_fV1ShjZm_56tGutS436zfPz0Re_40Rx2DxreC1-Qs-zEcui7ZQr/exec" 
-                title="Appointment Scheduler"
-                style="border: 1px solid #ccc; border-radius: 10px; width: 100%; max-width: 700px; height: 600px; display: block; margin: 0 auto;"
-                id="appointmentScheduler">
-            </iframe>
-        </div>
+  <div class="container">
+    <h2>Book Your Appointment</h2>
+    <div id="dynamicForm"></div>
+    <button type="button" onclick="bookAppointment()">Book Appointment</button>
+  </div>
 
-        <div class="service-area-map">
-            <h3>Service Area</h3>
-            <p>Currently serving Chandler/Phoenix area. Check the map for our service range.</p>
-            <img src="https://www.azcommerce.com/a/profiles/images/maps/Chandler.png" alt="Service Area Map" />
-        </div>
+  <script>
+    let resizeTimeout = null;
 
-        <div class="testimonials">
-            <h3>What Our Customers Say</h3>
-            <blockquote class="testimonial">
-                <p>"Henry's Super Scoops made my yard look and smell great again! Highly recommend their services!"</p>
-                <cite>- Happy Customer</cite>
-            </blockquote>
-            <blockquote class="testimonial">
-                <p>"They saved my entire Butt!"</p>
-                <cite>- Richard Jones</cite>
-            </blockquote>
-        </div>
-    </section>
+    function showLoading(message) {
+      document.getElementById('loadingOverlay').style.display = 'flex';
+      document.querySelector('#loadingOverlay .message').textContent = message;
+    }
 
-    <section id="about" class="content-section" style="display: none;">
-        <h2>Somebody’s got to do it, right?</h2>
-        <p>Henry’s Super Scoops is here for you. A DOG WASTE MANAGEMENT TEAM & WASTE REMOVAL Company. We come to your home when you need us MOST. Super Scoop’s is a name you can TRUST.</p>
-    </section>
+    function hideLoading() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
 
-    <section id="items" class="content-section" style="display: none;">
-        <div class="promo-container">
-            <div class="carousel-flex-container">
-                <div class="carousel-container" id="carousel1">
-                    <!-- Carousel slides and content -->
-                    <div class="carousel-slide">
-                        <img src="https://lh3.googleusercontent.com/drive-viewer/AEYmBYQampdP7XS7JAVai3vV55iQPdbLUFyGgsWVtzKreFItLOK1dq_FB3rzcq9ed2-ZRQtUIY6MoFnC_sjY8NSXZC8sOmUN=s1600" alt="Schedule a Visit">
-                        <p>Booking made easy! Select a time, and we'll be there with a smile.</p>
-                    </div>
-                    <!-- Add more slides as needed -->
-                </div>
-                <div id="slide-indicators-1"></div>
-            </div>
-        </div>
-    </section>
-</main>
+    function sendHeightToParent() {
+      const height = document.documentElement.scrollHeight;
+      console.log("Sending height to top window:", height);
+      // Use window.top to try to bypass any intermediate frames
+      window.top.postMessage({ type: 'resizeIframe', height: height, source: 'henrys_webapp' }, '*');
+    }
 
-<footer>
-    <p>Contact us at: SuperScoopsDWM@Gmail.com Or Text/Call: 602-320-3635</p>
-</footer>
+    function bookAppointment() {
+      const date = document.getElementById('Date') ? document.getElementById('Date').value : '';
+      const city = document.getElementById('City') ? document.getElementById('City').value : '';
+      const time = document.getElementById('time') ? document.getElementById('time').value : '';
+      const service = document.getElementById('service') ? document.getElementById('service').value : '';
+      const customerEmail = document.getElementById('CustomerEmail') ? document.getElementById('CustomerEmail').value : '';
+      const address = document.getElementById('address') ? document.getElementById('address').value : '';
 
-<script>
- // Listener to dynamically adjust iframe height
-  window.addEventListener('message', (event) => {
-    // Log every incoming message
-    console.log("Parent page received message:", event.data);
-    console.log("Message origin:", event.origin);
+      const assignedPersonnel = window.timeslotPersonnelMap && window.timeslotPersonnelMap[time];
+      if (!assignedPersonnel) {
+        alert('No personnel assigned for the selected time. Please select another time.');
+        return;
+      }
 
-    if (event.data && event.data.type === 'resizeIframe' && event.data.source === 'henrys_webapp') {
-      const iframe = document.getElementById('appointmentScheduler');
-      console.log("Iframe element found:", !!iframe);
+      const additionalInfoObj = {};
+      document.querySelectorAll('.form-element').forEach(element => {
+        if (!['Date', 'time', 'service', 'CustomerEmail', 'address'].includes(element.name)) {
+          additionalInfoObj[element.name] = element.value;
+        }
+      });
+      const additionalInfoJSON = JSON.stringify(additionalInfoObj);
+      const assignedPersonnelJSON = JSON.stringify(assignedPersonnel);
 
-      if (iframe) {
-        console.log("Updating iframe height to:", event.data.height);
-        iframe.style.height = `${event.data.height}px`;
+      showLoading('Booking your appointment...');
 
-        // Check inline and computed style after update
-        console.log("Iframe inline height style now:", iframe.style.height);
-        const computedHeight = window.getComputedStyle(iframe).height;
-        console.log("Iframe computed height after update:", computedHeight);
-      } else {
-        console.log("No iframe with id #appointmentScheduler found.");
+      google.script.run.withSuccessHandler(function(response) {
+        hideLoading();
+        alert(response);
+        fetchAndUpdateTimeslots();
+      }).withFailureHandler(function(error) {
+        hideLoading();
+        alert("Failed to book appointment: " + error.message);
+      }).createAppointment(date, time, service, customerEmail, address, additionalInfoJSON, assignedPersonnelJSON);
+    }
+
+    function fetchAndUpdateTimeslots() {
+      const city = document.getElementById('City') ? document.getElementById('City').value : '';
+      const date = document.getElementById('Date') ? document.getElementById('Date').value : '';
+
+      const timeSelect = document.getElementById('time');
+      if (timeSelect) {
+        timeSelect.innerHTML = '';
+        timeSelect.disabled = true;
+      }
+
+      if (city && date) {
+        showLoading('Fetching available times...');
+        google.script.run.withSuccessHandler(function(availableTimeslots) {
+          hideLoading();
+          window.timeslotPersonnelMap = {};
+
+          if (timeSelect) {
+            availableTimeslots.forEach(({ timeslot, personnel }) => {
+              const option = document.createElement('option');
+              option.value = timeslot;
+              option.textContent = timeslot;
+              window.timeslotPersonnelMap[timeslot] = personnel;
+              timeSelect.appendChild(option);
+            });
+
+            if (timeSelect.options.length === 0) {
+              const option = document.createElement('option');
+              option.value = '';
+              option.textContent = 'No available times';
+              timeSelect.appendChild(option);
+            } else {
+              timeSelect.disabled = false;
+            }
+          }
+
+          // After updating timeslots, recalculate height
+          sendHeightToParent();
+        }).withFailureHandler(function(error) {
+          hideLoading();
+          alert("Failed to fetch timeslots: " + error.message);
+        }).getAvailableTimeslotsAndPersonnel(date, city);
       }
     }
-  });
 
-  function showSection(sectionId) {
-    document.querySelectorAll('.content-section').forEach(section => {
-      section.style.display = section.id === sectionId ? 'block' : 'none';
-    });
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.toggle('active', link.getAttribute('onclick').includes(sectionId));
-    });
-  }
-</script>
-<script src="scripts.js"></script>
+    function setupEventListeners() {
+      const citySelect = document.getElementById('City');
+      const dateInput = document.getElementById('Date');
+
+      if (citySelect && dateInput) {
+        citySelect.addEventListener('change', fetchAndUpdateTimeslots);
+        dateInput.addEventListener('change', fetchAndUpdateTimeslots);
+      } else {
+        console.error('City or date elements not found. Ensure elements are created.');
+      }
+    }
+
+    function loadFormElements() {
+      showLoading('Loading form...');
+      google.script.run
+          .withSuccessHandler(function (formElements) {
+              hideLoading();
+              const container = document.getElementById('dynamicForm');
+              container.innerHTML = ''; // Clear existing
+              formElements.forEach(element => {
+                const label = document.createElement('label');
+                label.textContent = element.label || element.description;
+                label.htmlFor = element.item;
+                label.className = 'form-element-label';
+
+                let inputElement;
+                if (element.type === 'select') {
+                  inputElement = document.createElement('select');
+                  element.options.forEach(option => {
+                      const optionElement = document.createElement('option');
+                      optionElement.textContent = option;
+                      optionElement.value = option;
+                      inputElement.appendChild(optionElement);
+                  });
+                  if (element.item === 'time') {
+                      inputElement.disabled = true;
+                  }
+                } else {
+                  inputElement = document.createElement('input');
+                  inputElement.type = element.type;
+                }
+
+                inputElement.id = element.item;
+                inputElement.name = element.item;
+                if (element.placeholder) inputElement.placeholder = element.placeholder;
+                if (element.required) inputElement.required = true;
+                inputElement.className = 'form-element';
+
+                container.appendChild(label);
+                container.appendChild(inputElement);
+              });
+
+              setupEventListeners();
+
+              // Notify parent that form is initially loaded
+              sendHeightToParent();
+
+              // After a short delay, re-check height in case of late changes
+              setTimeout(() => {
+                console.log("Re-sending iframe height after delay.");
+                sendHeightToParent();
+              }, 1000);
+          })
+          .withFailureHandler(function (error) {
+              hideLoading();
+              alert('Failed to load form elements: ' + error.message);
+          })
+          .getFormElements();
+    }
+
+    // Send height when the page loads, then load form elements
+    window.onload = () => {
+      sendHeightToParent();
+      loadFormElements();
+    };
+
+    // Adjust height on window resize
+    window.onresize = sendHeightToParent;
+
+    // Use MutationObserver to detect any changes in the form
+    const targetNode = document.getElementById('dynamicForm');
+    if (targetNode) {
+      const observer = new MutationObserver(() => {
+        if (resizeTimeout) clearTimeout(resizeTimeout);
+        // After no DOM changes for 500 ms, send height again
+        resizeTimeout = setTimeout(() => {
+          console.log("MutationObserver stable, sending height again.");
+          sendHeightToParent();
+        }, 500);
+      });
+      observer.observe(targetNode, { childList: true, subtree: true });
+    } else {
+      console.warn("No #dynamicForm found for MutationObserver.");
+    }
+  </script>
 </body>
 </html>

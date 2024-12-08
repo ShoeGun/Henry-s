@@ -45,7 +45,7 @@
             <h2>Book Appointment Now</h2>
             <p>Use our quick and easy scheduling tool to book your appointment today!</p>
             <iframe 
-                src="https://script.google.com/macros/s/AKfycbxn_3l41qGgTAj4rurfNUMvjmZ3_PY4ZzDVJaoZmoRySxYmclcoNASjZkb-xm-wPvp8/exec" 
+                src="https://script.google.com/macros/s/AKfycbyMyl0vL3EtAWSVbeD7dJqMBXQbPZK1R-6cb4VPj_4hmQ2_Z7eKNV-H-9YQWRzMcuOR/exec" 
                 title="Appointment Scheduler"
                 style="border: 1px solid #ccc; border-radius: 10px; width: 100%; max-width: 700px; height: 600px; display: block; margin: 0 auto;"
                 id="appointmentScheduler">
@@ -98,28 +98,20 @@
 </footer>
 
 <script>
-    // Listener to dynamically adjust iframe height
-    window.addEventListener('message', (event) => {
-        // Log the entire event.data object to see what the parent is receiving
-        console.log("Parent page received message:", event.data);
+ // Listener to dynamically adjust iframe height
+window.addEventListener('message', (event) => {
+    console.log("Parent page received message:", event.data);
 
-        if (event.data && event.data.type === 'resizeIframe' && event.data.height) {
-            console.log("Resizing iframe to height:", event.data.height);
-            const iframe = document.getElementById('appointmentScheduler');
-            if (iframe) {
-                iframe.style.height = `${event.data.height}px`;
-            }
+    // Ensure the message is from the correct source
+    if (event.data && event.data.type === 'resizeIframe' && event.data.source === 'henrys_webapp') {
+        console.log("Resizing iframe to height:", event.data.height);
+        const iframe = document.getElementById('appointmentScheduler');
+        if (iframe) {
+            iframe.style.height = `${event.data.height}px`;
         }
-    });
-
-    function showSection(sectionId) {
-        document.querySelectorAll('.content-section').forEach(section => {
-            section.style.display = section.id === sectionId ? 'block' : 'none';
-        });
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.toggle('active', link.getAttribute('onclick').includes(sectionId));
-        });
     }
+});
+
 </script>
 <script src="scripts.js"></script>
 </body>

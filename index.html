@@ -193,7 +193,15 @@ Super Scoop’s is a name you can TRUST.
 <footer>
     <p>Contact us at: SuperScoopsDWM@Gmail.com Or Text/Call: 602-320-3635</p>
 </footer>
-
+<script>
+    // Listener to adjust iframe height dynamically
+    window.addEventListener('message', (event) => {
+        if (event.data.iframeHeight) {
+            const iframe = document.querySelector('iframe');
+            iframe.style.height = `${event.data.iframeHeight}px`;
+        }
+    });
+</script>
 <script src="scripts.js"></script>
 </body>
 </html>

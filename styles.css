@@ -25,12 +25,12 @@ header {
     color: #FFFFFF;
     position: relative;
     margin-bottom: 20px;
-    z-index: 1;
+  /*  z-index: 1; */
 }
 
 #logo {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     width: 300px;
     height: auto;
     display: block;
@@ -62,6 +62,7 @@ nav::after {
 }
 
 #nav-list {
+    
     list-style: none;
     padding: 0;
     margin: 0;
@@ -74,6 +75,8 @@ nav::after {
 }
 
 #nav-list li a {
+     width: auto;
+    border-radius: 5px;
     color: white;
     text-decoration: none;
     padding: 10px 20px;

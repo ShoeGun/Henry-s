@@ -17,15 +17,15 @@ body {
     background-color: var(--bg-doc);
     line-height: 1.6;
     color: #333;
+    text-align: center; /* Default centering for most content */
 }
 
 header {
     background-color: #023566;
     color: #FFFFFF;
-    position: relative; /* Necessary for absolute positioning of clouds */
+    position: relative;
     margin-bottom: 20px;
-    z-index: 1; /* Place header below clouds */
-    overflow: visible; /* Ensure clouds are visible outside the header */
+    z-index: 1;
 }
 
 #logo {
@@ -39,11 +39,10 @@ header {
 
 /* Navigation Bar */
 nav {
-    background-color: #023566; /* Navbar color */
-    border-bottom: 3px solid black; /* Simulated folder appearance */
-    position: relative; /* Ensure proper stacking with clouds */
-    z-index: 3; /* Ensure navbar stays above the clouds */
-    padding-bottom: 3px; /* Space for border */
+    background-color: #023566;
+    border-bottom: 3px solid black;
+    position: relative;
+    z-index: 3;
 }
 
 nav::after {
@@ -84,7 +83,7 @@ nav::after {
 
 /* Clouds */
 .cloud {
-    display: flex; /* Centers the text within the cloud */
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--cloud-bg);
@@ -98,7 +97,7 @@ nav::after {
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    z-index: 2; /* Clouds are behind navbar */
+    z-index: 2;
 }
 
 .cloud::before, .cloud::after {
@@ -168,9 +167,11 @@ nav::after {
 /* Services Section */
 .pricing-chart {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center services */
+    flex-direction: column;
+    align-items: center; /* Center services */
     gap: 20px; /* Add spacing between services */
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .pricing-chart .service {
@@ -179,7 +180,8 @@ nav::after {
     padding: 20px;
     border-radius: 100px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
-    flex: 0 1 calc(30% - 20px); /* Adjust to fit 3 per row */
+    width: 100%; /* Full width for better centering */
+    max-width: 400px; /* Limit the width */
     text-align: center;
 }
 
@@ -188,15 +190,44 @@ nav::after {
     margin-bottom: 10px;
 }
 
-.service {
-    background-color: black;
-    color: #333;
+/* CTA Section */
+.cta {
+    text-align: center;
+    background-color: #f4f4f4;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin: 50px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.service h3 {
+.cta h2 {
+    color: #D00000;
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.cta p {
+    color: #555;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Service Area Section */
+.service-area-map {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.service-area-map img {
+    max-width: 60%; /* Reduce map size */
+    height: auto;
+    border: 3px solid #D00000;
+    margin: 20px auto;
+}
+
+.service-area-map h3 {
     color: #D00000;
     margin-bottom: 10px;
 }
@@ -237,5 +268,9 @@ footer {
 
     .pricing-chart .service {
         flex: 0 1 calc(100% - 20px); /* Full-width on small screens */
+    }
+
+    .service-area-map img {
+        max-width: 80%; /* Further reduce map size on small screens */
     }
 }

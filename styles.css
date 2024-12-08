@@ -206,7 +206,7 @@ nav::after {
 
 /* Services Section */
 /* Pricing chart styles */
-.pricing-chart .service {
+.pricing-chart .service .services {
     background-color: #B7C9E2;
     color: #333;
     padding: 20px;

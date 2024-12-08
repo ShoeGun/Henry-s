@@ -154,7 +154,88 @@ nav::after {
     margin: 0 auto; /* Center the logo */
 }
   
+/* Clouds */
+.cloud {
+    display: flex; /* Centers the text within the cloud */
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cloud-bg);
+    border-radius: calc(1.5em * var(--cloud-scale));
+    box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) var(--cloud-inset-shadow),
+                0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) rgba(0, 0, 0, 0.25);
+    height: calc(2em * var(--cloud-scale));
+    width: calc(4em * var(--cloud-scale));
+    position: absolute;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 1em;
+    color: black;
+    white-space: nowrap;
+}
 
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background-color: var(--cloud-bg);
+    border-radius: 100%;
+}
+
+.cloud:before {
+    width: calc(2em * var(--cloud-scale));
+    height: calc(2em * var(--cloud-scale));
+    top: calc(-1em * var(--cloud-scale));
+    left: calc(.5em * var(--cloud-scale));
+}
+
+.cloud:after {
+    width: calc(1.5em * var(--cloud-scale));
+    height: calc(1.5em * var(--cloud-scale));
+    top: calc(-.75em * var(--cloud-scale));
+    right: calc(.5em * var(--cloud-scale));
+}
+
+.cloud > span {
+    z-index: 1;
+    margin: 0; /* Remove any extra margin */
+}
+
+/* Cloud Animations */
+@keyframes cloud-move {
+    0% {
+        left: -250px;
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-50px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-50px);
+    }
+    100% {
+        left: 100%;
+        transform: translateY(0);
+    }
+}
+
+#cloud1 {
+    animation: cloud-move 30s linear infinite;
+    top: 100px;
+    left: -200px;
+}
+
+#cloud2 {
+    animation: cloud-move 50s linear infinite;
+    top: 200px;
+    left: -300px;
+}
+
+#cloud3 {
+    animation: cloud-move 40s linear infinite;
+    top: 150px;
+    left: -400px;
+}
 
 
 /* Media queries for larger screens */

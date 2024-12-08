@@ -12,21 +12,40 @@
     --cloud-scale: 2; /* Adjust the size of clouds */
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-doc);
-    line-height: 1.6;
-    color: #333;
-    text-align: center; /* Default centering for most content */
-}
+
+
 
 header {
     background-color: #023566;
     color: #FFFFFF;
-    position: relative;
-    margin-bottom: 20px;
-  /*  z-index: 1; */
+    padding: 20px;
+    position: relative; /* Necessary for absolute positioning of clouds */
+    padding: 0px;
 }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #6f8db8; /* Background color of the entire page */
+      font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    /*padding: 20px;*/
+}
+
+
+.content-section {
+    text-align: center;
+    margin-bottom: 30px;
+    transition: opacity 5s ease;
+    padding: 20px; /* Adjust the padding value as needed */
+}
+
+
+.content-section h2 {
+    color: Black; /* Red color for the section titles */
+    margin-bottom: 20px;
+}
+
 
 #logo {
     position: relative;

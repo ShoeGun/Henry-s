@@ -192,18 +192,18 @@ nav::after {
 
 /* Pricing chart styles */
 .pricing-chart .service {
-        display: flex; /* Enable flexbox */
+    display: flex; /* Enable flexbox */
     flex-direction: row; /* Arrange items in a row */
     justify-content: center; /* Center items horizontally */
     align-items: flex-start; /* Align items to the top */
     gap: 20px; /* Add space between items */
     text-align: center; /* Ensure text inside services is centered */
     
-
 }
 .pricing-chart .service h3 {
     color: #D00000; /* Red color for service titles */
     margin-bottom: 10px;
+    text-align: center;
 }
 
 /* Mobile View: Stack Vertically */

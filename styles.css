@@ -190,28 +190,18 @@ nav::after {
     left: -400px;
 }
 
-/* testing area  */
-.pricing-chart {
-    display: flex; /* Enables flexbox */
-    justify-content: center; /* Centers items horizontally */
-    align-items: flex-start; /* Aligns items to the top */
-    flex-wrap: nowrap; /* Ensures all items are in one row (no wrapping) */
-    gap: 20px; /* Adds spacing between the items */
-    margin: 20px auto; /* Centers the entire chart horizontally */
-    padding: 20px 0; /* Adds padding above and below */
-    text-align: center; /* Ensures text in each box is centered */
-}
-
-/* Service Box Styling */
+/* Pricing chart styles */
 .pricing-chart .service {
-    background-color: #B7C9E2; /* Light blue background */
-    color: #333; /* Dark text color */
+    background-color: #B7C9E2;
+    color: #333;
     padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-    flex: 1 1 auto; /* Allows items to grow and shrink */
-    max-width: 250px; /* Ensures consistent width */
-    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 100px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
+}
+.pricing-chart .service h3 {
+    color: #D00000; /* Red color for service titles */
+    margin-bottom: 10px;
 }
 
 /* Mobile View: Stack Vertically */

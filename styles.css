@@ -105,48 +105,43 @@ header {
 
 /* Style for the navbar with a folder appearance */
 nav {
-    background-color: #023566; /* Your navbar color */
-    border-bottom: 3px solid Black; /* Bottom border to simulate folder appearance */
+    background-color: #023566; /* Navbar color */
+    border-bottom: 3px solid Black; /* Simulated folder appearance */
 }
 
-  
-  /* Creates a pseudo-element that looks like a border */
 nav::after {
     content: '';
     position: absolute;
-    bottom: -3px; /* Adjust this value to move the border up or down */
+    bottom: -3px;
     left: 0;
     width: 100%;
-    height: 3px; /* Thickness of the border */
-    background-color: Black; /* Color of the border */
+    height: 3px;
+    background-color: Black;
 }
-  
-  
-  
+
 #nav-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center; /* This will center your nav items */
-    padding-bottom: 3px; /* Creates space for the border */
+    justify-content: center;
+    padding-bottom: 3px; /* Space for border */
 }
 
 #nav-list li {
-    margin: 0 10px; /* Adjust the space between nav items as needed */
-    position: relative; /* For pseudo-elements positioning */
+    margin: 0 10px;
 }
 
 #nav-list li a {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 10px 20px 0 0; /* Rounded top edges */
-    transition: background-color .5s, color 0.3s;
+    border-radius: 10px 20px 0 0;
+    transition: background-color 0.5s, color 0.3s;
 }
 
 #nav-list li a:hover, #nav-list li a.active {
-    background-color: Black; /* Highlight color */
+    background-color: Black;
     color: white;
 }
 

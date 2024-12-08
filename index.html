@@ -99,18 +99,18 @@
 
 <script>
  // Listener to dynamically adjust iframe height
-window.addEventListener('message', (event) => {
+  window.addEventListener('message', (event) => {
+    // Log every incoming message
     console.log("Parent page received message:", event.data);
 
-    // Ensure the message is from the correct source
-    if (event.data && event.data.type === 'resizeIframe' && event.data.source === 'henrys_webapp') {
-        console.log("Resizing iframe to height:", event.data.height);
-        const iframe = document.getElementById('appointmentScheduler');
-        if (iframe) {
-            iframe.style.height = `${event.data.height}px`;
-        }
+    if (event.data && event.data.type === 'resizeIframe') {
+      const iframe = document.getElementById('appointmentScheduler');
+      if (iframe) {
+        console.log("Updating iframe height to:", event.data.height);
+        iframe.style.height = `${event.data.height}px`;
+      }
     }
-});
+  });
 
 </script>
 <script src="scripts.js"></script>

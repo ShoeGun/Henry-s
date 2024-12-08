@@ -100,7 +100,11 @@
 <script>
     // Listener to dynamically adjust iframe height
     window.addEventListener('message', (event) => {
+        // Log the entire event.data object to see what the parent is receiving
+        console.log("Parent page received message:", event.data);
+
         if (event.data && event.data.type === 'resizeIframe' && event.data.height) {
+            console.log("Resizing iframe to height:", event.data.height);
             const iframe = document.getElementById('appointmentScheduler');
             if (iframe) {
                 iframe.style.height = `${event.data.height}px`;
@@ -108,7 +112,6 @@
         }
     });
 
-    // Function to handle section navigation
     function showSection(sectionId) {
         document.querySelectorAll('.content-section').forEach(section => {
             section.style.display = section.id === sectionId ? 'block' : 'none';

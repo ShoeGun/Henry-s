@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More About Henry's Super Scoops CMS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Henry's Super Scoops CMS</h1>
+    </header>
+    <main>
+        <section id="project-description">
+            <h2>About the Project</h2>
+            <p>
+                The Henry's Super Scoops CMS is a free and simple content management system (CMS) designed to 
+                streamline appointment scheduling, employee workload management, and client data tracking. 
+                Built on Google Sheets, this system integrates seamlessly with Google Calendar to manage schedules efficiently.
+            </p>
+            <p>
+                This CMS dynamically balances and schedules assignees by considering their operating regions 
+                and working hours while evenly distributing tasks. It’s an ideal solution for small businesses 
+                seeking a low-cost yet highly effective way to manage appointments and employee resources.
+            </p>
+            <p>
+                Below, you can interact with the system. Use the web app form to schedule an appointment, and 
+                watch the data update in real-time on the connected Google Spreadsheet.
+            </p>
+        </section>
+
+        <section id="interactive-demo">
+            <h2>Interactive Demo</h2>
+            <div id="demo-container">
+                <div id="spreadsheet-container">
+                    <h3>Google Spreadsheet</h3>
+                    <iframe
+                        src="YOUR_GOOGLE_SPREADSHEET_LINK_HERE"
+                        title="Google Spreadsheet"
+                        style="border: 1px solid #ccc; width: 100%; height: 500px;"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div id="webapp-container">
+                    <h3>Appointment Scheduler</h3>
+                    <iframe
+                        src="https://script.google.com/macros/s/YOUR_GOOGLE_WEBAPP_LINK_HERE/exec"
+                        title="Appointment Scheduler"
+                        style="border: 1px solid #ccc; width: 100%; height: 500px;"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Henry's Super Scoops. Built with Google Sheets, Apps Script, and love.</p>
+    </footer>
+
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background-color: #023566;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #project-description {
+            margin-bottom: 40px;
+        }
+
+        #interactive-demo {
+            text-align: center;
+        }
+
+        #demo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        #spreadsheet-container, #webapp-container {
+            flex: 1 1 calc(45% - 20px);
+            min-width: 300px;
+        }
+
+        iframe {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</body>
+</html>

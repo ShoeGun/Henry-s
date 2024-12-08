@@ -12,9 +12,6 @@
     --cloud-scale: 2; /* Adjust the size of clouds */
 }
 
-
-
-
 header {
     background-color: #023566;
     color: #FFFFFF;
@@ -45,6 +42,7 @@ body {
     color: Black; /* Red color for the section titles */
     margin-bottom: 20px;
 }
+
 
 
 #logo {

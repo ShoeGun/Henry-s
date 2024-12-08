@@ -45,6 +45,12 @@ nav {
     z-index:2;
 }
 
+.content-section {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
 nav::after {
     content: '';
     position: absolute;

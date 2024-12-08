@@ -489,30 +489,55 @@ footer {
   }
 }
 
-/* Carousel Slide and Image Styling */
-.carousel-slide img {
-  width: 100%;
-  height: auto;
-  object-fit: cover; /* Cover the slide area, maintaining aspect ratio */
-}
-
-    .cta {
-    display: block; /* Visible by default */
+.cta {
     text-align: center;
     background-color: #f4f4f4;
     padding: 20px;
-    margin: 0 auto 30px auto;
-    max-width: 800px; /* Limits the width of the CTA section */
+    margin: 50px auto; /* Centers the CTA horizontally */
+    max-width: 800px; /* Restricts the width */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Allows precise centering adjustments */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    min-height: 300px; /* Ensures a decent height for visual balance */
+}
+
+.cta h2 {
+    color: #D00000;
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.cta p {
+    color: #555;
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
 .cta iframe {
     display: block;
-    margin: 20px auto; /* Center the iframe */
-    width: 100%; /* Ensures it fills the available space */
-    max-width: 700px; /* Prevents it from being too wide */
-    height: 600px; /* Makes it taller */
+    margin: 20px auto;
+    width: 100%;
+    max-width: 700px; /* Restricts iframe width */
+    height: 600px; /* Adjust iframe height */
     border: 1px solid #ccc;
     border-radius: 10px;
+    box-sizing: border-box; /* Includes padding and border in size */
 }
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .cta {
+        padding: 15px;
+        margin: 20px auto; /* Centers CTA on smaller screens */
+        max-width: 95%; /* Adapts to smaller screen sizes */
+    }
+
+    .cta iframe {
+        max-width: 100%; /* Ensures iframe fits smaller screens */
+    }
+}
+

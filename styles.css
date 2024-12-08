@@ -497,3 +497,23 @@ footer {
   height: auto;
   object-fit: cover; /* Cover the slide area, maintaining aspect ratio */
 }
+
+    .cta {
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin: 0 auto 30px auto;
+    max-width: 800px; /* Limits the width of the CTA section */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cta iframe {
+    display: block;
+    margin: 20px auto; /* Center the iframe */
+    width: 100%; /* Ensures it fills the available space */
+    max-width: 700px; /* Prevents it from being too wide */
+    height: 600px; /* Makes it taller */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}

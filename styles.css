@@ -7,7 +7,7 @@
 
 :root {
     --bg-doc: #6f8db8;
-    --cloud-scale: 2; /* Adjust this factor as desired */
+    --cloud-scale: 2; /* Adjust this if you want bigger/smaller clouds */
 }
 
 body {
@@ -23,7 +23,7 @@ header {
     color: #FFFFFF;
     position: relative;
     margin-bottom: 20px;
-    z-index: 1; /* Base stacking context */
+    z-index: 2; /* Create a stacking context for logo and clouds */
     overflow: visible; 
 }
 
@@ -72,33 +72,32 @@ nav::after {
 
 #logo {
     position: relative;
-    z-index: 10; /* Logo above clouds */
+    z-index: 3; /* Ensure logo is above clouds */
     width: 300px;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
-/* Clouds */
+/* Clouds with Pseudo-elements for Puffiness */
 .cloud {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: linear-gradient(to bottom, hsla(0,0%,100%,0), hsla(0,0%,100%,.1));
     color: black;
-    white-space: nowrap;
-    font-size: 1em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background-color: #fff;
+    background-image: linear-gradient(to bottom, hsla(0,0%,100%,0), hsla(0,0%,100%,.1));
     border-radius: calc(1.5em * var(--cloud-scale));
     box-shadow: inset 0 0 0 calc(1px * var(--cloud-scale)) hsla(0,0%,100%,.5),
                 0 calc(2px * var(--cloud-scale)) calc(3px * var(--cloud-scale)) hsla(0,0%,0%,.25);
     height: calc(2em * var(--cloud-scale));
     width: calc(4em * var(--cloud-scale));
+    font-size: 1em;
+    white-space: nowrap;
     transform: translate(-50%, -50%);
-    z-index: 5; /* Clouds below logo (z-index:10) */
+    z-index: 1; /* Below logo (z-index:3) */
+    background-color: #fff;
     padding: 0 20px;
 }
 
@@ -107,7 +106,7 @@ nav::after {
     z-index: 2;
     white-space: nowrap;
     font-weight: bold;
-    margin: 0;
+    margin: 0; /* No extra margin */
 }
 
 .cloud::before, .cloud::after {
@@ -133,25 +132,14 @@ nav::after {
 
 @keyframes cloud-move {
     0% {
-        left: -250px;
-        transform: translateY(0px);
-    }
-    25% {
-        transform: translateY(-50px);
-    }
-    50% {
-        transform: translateY(0px);
-    }
-    75% {
-        transform: translateY(-50px);
+        transform: translateX(-1000px);
     }
     100% {
-        left: 100%;
-        transform: translateY(0px);
+        transform: translateX(1000px);
     }
 }
 
-/* Clouds position and animation */
+/* Position clouds as needed; adjust top/left if needed */
 #cloud1, #cloud2, #cloud3 {
     top: 100px;
     animation: cloud-move 30s linear infinite;
@@ -168,7 +156,7 @@ nav::after {
 
     #cloud1, #cloud2, #cloud3 {
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) translateY(-50%);
     }
 
     #cloud1 { top: 80px; }
@@ -188,7 +176,7 @@ nav::after {
     margin-bottom: 20px;
 }
 
-/* Pricing Chart and Services */
+/* Pricing, Services, Maps, Testimonials unchanged */
 .pricing-chart .service {
     background-color: #B7C9E2;
     color: #333;
@@ -197,7 +185,6 @@ nav::after {
     border-radius: 100px;
     box-shadow: 0 5px 5px rgba(0,0,0,0.15);
 }
-
 .pricing-chart .service h3 {
     color: #D00000;
     margin-bottom: 10px;
@@ -217,7 +204,6 @@ nav::after {
     margin-bottom: 10px;
 }
 
-/* Service Area Map */
 .service-area-map img {
     max-width: 20%;
     height: auto;
@@ -226,7 +212,6 @@ nav::after {
     margin: 20px auto;
 }
 
-/* Testimonials */
 .testimonials blockquote {
     background-color: #B7C9E2;
     border-left: 3px solid #D00000;

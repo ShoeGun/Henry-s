@@ -30,7 +30,7 @@ header {
 
 #logo {
     position: relative;
-    z-index: 2;
+    z-index: 5;
     width: 300px;
     height: auto;
     display: block;
@@ -42,7 +42,7 @@ nav {
     background-color: #023566;
     border-bottom: 3px solid black;
     position: relative;
-    z-index: 3;
+    z-index:3;
 }
 
 nav::after {
@@ -97,7 +97,7 @@ nav::after {
     font-size: 1em;
     color: black;
     white-space: nowrap;
-    z-index: 10;
+    z-index: 4;
 }
 
 .cloud::before, .cloud::after {

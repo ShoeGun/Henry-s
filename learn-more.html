@@ -44,6 +44,7 @@
                 <div id="webapp-container">
                     <h3>Appointment Scheduler</h3>
                     <iframe
+                        id="webapp-iframe"
                         src="https://script.google.com/macros/s/AKfycbybX55VyFk1VS898LEKyWrKJN3NYfSEEOCRfZpHI9PAivvYDDtqnBrF1Uh0MR2EN7s/exec"
                         title="Appointment Scheduler"
                         style="border: 1px solid #ccc; width: 100%; height: 500px;"
@@ -118,5 +119,20 @@
             margin-top: 20px;
         }
     </style>
+
+    <script>
+        // Adjust iframe height dynamically based on messages from the web app
+        window.addEventListener('message', (event) => {
+            console.log("Received message:", event.data);
+
+            if (event.data && event.data.type === 'resizeIframe') {
+                const iframe = document.getElementById('webapp-iframe');
+                if (iframe) {
+                    console.log("Adjusting iframe height to:", event.data.height);
+                    iframe.style.height = `${event.data.height}px`;
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -68,6 +68,16 @@
             padding: 10px;
             margin-top: 20px;
         }
+
+        a {
+            color: #023566;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -97,16 +107,24 @@
             <h2>Interactive Demo</h2>
             <div id="demo-container">
                 <div id="spreadsheet-container">
-                    <h3>Google Spreadsheet</h3>
+                    <h3>
+                        <a href="https://docs.google.com/spreadsheets/d/1dbPJFuL9uoZl-pwMCb-XigVU1n2RRrUW3h13l4-7lnw/edit?usp=sharing" target="_blank">
+                            Google Spreadsheet
+                        </a>
+                    </h3>
                     <iframe
-                        src="https://docs.google.com/spreadsheets/d/1dbPJFuL9uoZl-pwMCb-XigVU1n2RRrUW3h13l4-7lnw/edit?usp=sharing"
+                        src="https://docs.google.com/spreadsheets/d/e/<your-published-id>/pubhtml?widget=true&amp;headers=false"
                         id="spreadsheet-iframe"
                         title="Google Spreadsheet"
                         allowfullscreen>
                     </iframe>
                 </div>
                 <div id="webapp-container">
-                    <h3>Appointment Scheduler</h3>
+                    <h3>
+                        <a href="https://shoegun.github.io/Henry-s/" target="_blank">
+                            Appointment Scheduler
+                        </a>
+                    </h3>
                     <iframe
                         src="https://script.google.com/macros/s/AKfycbybX55VyFk1VS898LEKyWrKJN3NYfSEEOCRfZpHI9PAivvYDDtqnBrF1Uh0MR2EN7s/exec"
                         id="webapp-iframe"
@@ -122,40 +140,29 @@
     </footer>
 
     <script>
-        // Listener to dynamically adjust iframe height
         window.addEventListener('message', (event) => {
-            console.log("Received message:", event.data);
-            console.log("Message origin:", event.origin);
+            const allowedOrigins = [
+                "https://script.google.com",
+                "https://docs.google.com"
+            ];
 
-            if (!event.data || !event.data.type) {
-                console.warn("Invalid message format. Ignoring.");
+            if (!allowedOrigins.includes(event.origin)) {
+                console.warn("Message from unauthorized origin:", event.origin);
                 return;
             }
 
-            if (event.data.type === 'resizeIframe') {
-                const { source, height } = event.data;
+            console.log("Received message:", event.data);
 
-                if (source === 'webapp') {
-                    const webappIframe = document.getElementById('webapp-iframe');
-                    if (webappIframe) {
-                        console.log("Adjusting webapp iframe height to:", height);
-                        webappIframe.style.height = `${height}px`;
-                    } else {
-                        console.error("Webapp iframe not found.");
-                    }
-                } else if (source === 'spreadsheet') {
-                    const spreadsheetIframe = document.getElementById('spreadsheet-iframe');
-                    if (spreadsheetIframe) {
-                        console.log("Adjusting spreadsheet iframe height to:", height);
-                        spreadsheetIframe.style.height = `${height}px`;
-                    } else {
-                        console.error("Spreadsheet iframe not found.");
-                    }
+            if (event.data && event.data.type === 'resizeIframe') {
+                const iframeId = event.data.source === 'webapp' ? 'webapp-iframe' : 'spreadsheet-iframe';
+                const iframe = document.getElementById(iframeId);
+
+                if (iframe) {
+                    console.log(`Adjusting ${iframeId} height to:`, event.data.height);
+                    iframe.style.height = `${event.data.height}px`;
                 } else {
-                    console.warn("Unknown iframe source:", source);
+                    console.warn(`Iframe with ID ${iframeId} not found.`);
                 }
-            } else {
-                console.warn("Unknown message type:", event.data.type);
             }
         });
     </script>

@@ -5,60 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn More About Henry's Super Scoops CMS</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Henry's Super Scoops CMS</h1>
-    </header>
-    <main>
-        <section id="project-description">
-            <h2>About the Project</h2>
-            <p>
-                The Henry's Super Scoops CMS is a free and simple content management system (CMS) designed to 
-                streamline appointment scheduling, employee workload management, and client data tracking. 
-                Built on Google Sheets, this system integrates seamlessly with Google Calendar to manage schedules efficiently.
-            </p>
-            <p>
-                This CMS dynamically balances and schedules assignees by considering their operating regions 
-                and working hours while evenly distributing tasks. It’s an ideal solution for small businesses 
-                seeking a low-cost yet highly effective way to manage appointments and employee resources.
-            </p>
-            <p>
-                Below, you can interact with the system. Use the web app form to schedule an appointment, and 
-                watch the data update in real-time on the connected Google Spreadsheet.
-            </p>
-        </section>
-
-        <section id="interactive-demo">
-            <h2>Interactive Demo</h2>
-            <div id="demo-container">
-                <div id="spreadsheet-container">
-                    <h3>Google Spreadsheet</h3>
-                    <iframe
-                        id="spreadsheet-iframe"
-                        src="https://docs.google.com/spreadsheets/d/1dbPJFuL9uoZl-pwMCb-XigVU1n2RRrUW3h13l4-7lnw/edit?usp=sharing"
-                        title="Google Spreadsheet"
-                        style="border: 1px solid #ccc; width: 100%; height: 500px;"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div id="webapp-container">
-                    <h3>Appointment Scheduler</h3>
-                    <iframe
-                        id="webapp-iframe"
-                        src="https://script.google.com/macros/s/AKfycbybX55VyFk1VS898LEKyWrKJN3NYfSEEOCRfZpHI9PAivvYDDtqnBrF1Uh0MR2EN7s/exec"
-                        title="Appointment Scheduler"
-                        style="border: 1px solid #ccc; width: 100%; height: 500px;"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Henry's Super Scoops. Built with Google Sheets, Apps Script, and love.</p>
-    </footer>
-
     <style>
         /* Basic Reset */
         * {
@@ -111,6 +57,9 @@
         iframe {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 500px; /* Default height */
+            border: 1px solid #ccc;
         }
 
         footer {
@@ -120,28 +69,93 @@
             margin-top: 20px;
         }
     </style>
+</head>
+<body>
+    <header>
+        <h1>Henry's Super Scoops CMS</h1>
+    </header>
+    <main>
+        <section id="project-description">
+            <h2>About the Project</h2>
+            <p>
+                The Henry's Super Scoops CMS is a free and simple content management system (CMS) designed to 
+                streamline appointment scheduling, employee workload management, and client data tracking. 
+                Built on Google Sheets, this system integrates seamlessly with Google Calendar to manage schedules efficiently.
+            </p>
+            <p>
+                This CMS dynamically balances and schedules assignees by considering their operating regions 
+                and working hours while evenly distributing tasks. It’s an ideal solution for small businesses 
+                seeking a low-cost yet highly effective way to manage appointments and employee resources.
+            </p>
+            <p>
+                Below, you can interact with the system. Use the web app form to schedule an appointment, and 
+                watch the data update in real-time on the connected Google Spreadsheet.
+            </p>
+        </section>
+
+        <section id="interactive-demo">
+            <h2>Interactive Demo</h2>
+            <div id="demo-container">
+                <div id="spreadsheet-container">
+                    <h3>Google Spreadsheet</h3>
+                    <iframe
+                        src="https://docs.google.com/spreadsheets/d/1dbPJFuL9uoZl-pwMCb-XigVU1n2RRrUW3h13l4-7lnw/edit?usp=sharing"
+                        id="spreadsheet-iframe"
+                        title="Google Spreadsheet"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div id="webapp-container">
+                    <h3>Appointment Scheduler</h3>
+                    <iframe
+                        src="https://script.google.com/macros/s/AKfycbybX55VyFk1VS898LEKyWrKJN3NYfSEEOCRfZpHI9PAivvYDDtqnBrF1Uh0MR2EN7s/exec"
+                        id="webapp-iframe"
+                        title="Appointment Scheduler"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Henry's Super Scoops. Built with Google Sheets, Apps Script, and love.</p>
+    </footer>
 
     <script>
-        // Listen for messages to adjust iframe heights dynamically
+        // Listener to dynamically adjust iframe height
         window.addEventListener('message', (event) => {
             console.log("Received message:", event.data);
+            console.log("Message origin:", event.origin);
 
-            if (event.data && event.data.type === 'resizeIframe') {
+            if (!event.data || !event.data.type) {
+                console.warn("Invalid message format. Ignoring.");
+                return;
+            }
+
+            if (event.data.type === 'resizeIframe') {
                 const { source, height } = event.data;
 
-                if (source === 'spreadsheet') {
-                    const spreadsheetIframe = document.getElementById('spreadsheet-iframe');
-                    if (spreadsheetIframe) {
-                        console.log("Adjusting spreadsheet iframe height to:", height);
-                        spreadsheetIframe.style.height = `${height}px`;
-                    }
-                } else if (source === 'webapp') {
+                if (source === 'webapp') {
                     const webappIframe = document.getElementById('webapp-iframe');
                     if (webappIframe) {
                         console.log("Adjusting webapp iframe height to:", height);
                         webappIframe.style.height = `${height}px`;
+                    } else {
+                        console.error("Webapp iframe not found.");
                     }
+                } else if (source === 'spreadsheet') {
+                    const spreadsheetIframe = document.getElementById('spreadsheet-iframe');
+                    if (spreadsheetIframe) {
+                        console.log("Adjusting spreadsheet iframe height to:", height);
+                        spreadsheetIframe.style.height = `${height}px`;
+                    } else {
+                        console.error("Spreadsheet iframe not found.");
+                    }
+                } else {
+                    console.warn("Unknown iframe source:", source);
                 }
+            } else {
+                console.warn("Unknown message type:", event.data.type);
             }
         });
     </script>
